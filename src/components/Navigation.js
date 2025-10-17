@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Music } from "lucide-react";
 import MusicPlayer from "./MusicPlayer";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 const navItems = [
   { name: "Inicio", href: "#hero" },
@@ -21,7 +21,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
 
   // ✅ Usar configuración centralizada
-  const { nombre, colores } = useQuinceaneraConfig();
+  const { nombre, colores } = useHalloweenConfig();
 
   useEffect(() => {
     const handleScroll = () => {

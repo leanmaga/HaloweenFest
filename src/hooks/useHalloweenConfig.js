@@ -1,4 +1,4 @@
-// hooks/useQuinceaneraConfig.js
+// hooks/useHalloweenConfig.js
 "use client";
 
 import {
@@ -11,22 +11,18 @@ import {
 import { themeConfig } from "@/config/theme.config";
 
 /**
- * 🎯 HOOK CENTRALIZADO DE CONFIGURACIÓN
+ * 🎃 HOOK CENTRALIZADO DE CONFIGURACIÓN - HALLOWEEN
  *
  * Este hook combina:
  * 1. Configuración del cliente (client.config.js)
  * 2. Variables de entorno (para valores sensibles como API keys)
- * 3. Configuración de tema (theme.config.js)
+ * 3. Configuración de tema Halloween (theme.config.js)
  *
  * PRIORIDAD: client.config.js > variables de entorno > valores por defecto
  */
-export function useQuinceaneraConfig() {
-  // 👤 INFORMACIÓN PERSONAL
-  const nombre = clientConfig.quinceañera.nombre;
-  const edad = clientConfig.quinceañera.edad;
-  const apodo = clientConfig.quinceañera.apodo;
-
-  // 📅 INFORMACIÓN DEL EVENTO
+export function useHalloweenConfig() {
+  // 🎃 INFORMACIÓN DEL EVENTO
+  const nombreEvento = "Halloween Party";
   const fechaEvento = clientConfig.evento.fecha;
   const fechaCompleta = clientConfig.evento.fechaCompleta;
   const horaEvento = clientConfig.evento.hora;
@@ -51,7 +47,7 @@ export function useQuinceaneraConfig() {
   // 📱 REDES SOCIALES
   const instagramUser = clientConfig.redes.instagram.usuario;
   const instagramUrl = clientConfig.redes.instagram.url;
-  const hashtag = getHashtag();
+  const hashtag = "#HalloweenParty2025";
 
   // 📝 CONFIRMACIÓN DE ASISTENCIA (RSVP)
   const fechaLimiteRSVP = clientConfig.rsvp.fechaLimite;
@@ -72,8 +68,12 @@ export function useQuinceaneraConfig() {
   const musicTitle = clientConfig.musica.titulo;
   const musicAutoplay = clientConfig.musica.autoplay;
 
-  // 🎨 CÓDIGO DE VESTIMENTA
-  const codigoVestimenta = clientConfig.codigoVestimenta;
+  // 🎃 CÓDIGO DE VESTIMENTA - HALLOWEEN
+  const codigoVestimenta = {
+    tema: "¡Disfraz Obligatorio!",
+    descripcion:
+      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+  };
 
   // 🔐 ADMIN
   const adminPassword = clientConfig.admin.password;
@@ -95,28 +95,65 @@ export function useQuinceaneraConfig() {
     clientConfig.servicios.emailjs.publicKey;
 
   // 🌐 CONFIGURACIÓN DEL SITIO
-  const siteTitle = getSiteTitle();
-  const siteDescription = getSiteDescription();
+  const siteTitle = "Halloween Party 2025";
+  const siteDescription = "Una noche de terror y diversión inolvidable";
   const productionUrl =
     process.env.NEXT_PUBLIC_PRODUCTION_URL || clientConfig.sitio.url;
-  const siteName = clientConfig.sitio.nombre;
+  const siteName = "Halloween Party";
   const siteLanguage = clientConfig.sitio.idioma;
   const ogImage = clientConfig.sitio.imagenOG;
 
   // 🎭 SECCIONES VISIBLES
   const seccionesVisibles = clientConfig.seccionesVisibles;
 
-  // 🎨 TEMA Y COLORES
-  const colores = themeConfig.colores;
+  // 🎨 COLORES HALLOWEEN
+  const colores = {
+    naranja: "#FF6B35",
+    morado: "#6B2D5C",
+    negro: "#1a1a1a",
+    verde: "#4CAF50",
+    dorado: "#FFB800",
+    // Mantener compatibilidad con estructura anterior
+    primario: {
+      50: "#FFF3E0",
+      100: "#FFE0B2",
+      200: "#FFCC80",
+      300: "#FFB74D",
+      400: "#FFA726",
+      500: "#FF6B35",
+      600: "#F57C00",
+      700: "#E65100",
+      800: "#6B2D5C",
+      900: "#1a1a1a",
+    },
+    secundario: {
+      50: "#E8EAF6",
+      100: "#C5CAE9",
+      200: "#9FA8DA",
+      300: "#7986CB",
+      400: "#5C6BC0",
+      500: "#6B2D5C",
+      600: "#3949AB",
+      700: "#303F9F",
+      800: "#283593",
+      900: "#1A237E",
+    },
+    terciario: {
+      300: "#FFD54F",
+      400: "#FFB800",
+      500: "#FFA000",
+    },
+  };
+
   const efectos = themeConfig.efectos;
   const fuentes = themeConfig.fuentes;
 
   // 📊 TÍTULOS DINÁMICOS (para meta tags)
   const titulos = {
     principal: siteTitle,
-    admin: `Panel de Administración - ${nombre}`,
+    admin: `Panel de Administración - Halloween Party`,
     descripcion: siteDescription,
-    redes: `${nombre} ${edad} Años`,
+    redes: `Halloween Party 2025`,
   };
 
   // 🔄 VALIDACIONES
@@ -132,12 +169,8 @@ export function useQuinceaneraConfig() {
 
   // 🎯 RETURN: Toda la configuración en un solo objeto
   return {
-    // Personal
-    nombre,
-    edad,
-    apodo,
-
     // Evento
+    nombreEvento,
     fechaEvento,
     fechaCompleta,
     horaEvento,
@@ -208,7 +241,7 @@ export function useQuinceaneraConfig() {
     // Secciones visibles
     seccionesVisibles,
 
-    // Tema
+    // Tema Halloween
     colores,
     efectos,
     fuentes,
@@ -216,17 +249,27 @@ export function useQuinceaneraConfig() {
 }
 
 /**
- * 🎨 HOOK PARA OBTENER SOLO LOS COLORES
+ * 🎨 HOOK PARA OBTENER SOLO LOS COLORES HALLOWEEN
  */
-export function useThemeColors() {
-  return themeConfig.colores;
+export function useHalloweenColors() {
+  return {
+    naranja: "#FF6B35",
+    morado: "#6B2D5C",
+    negro: "#1a1a1a",
+    verde: "#4CAF50",
+    dorado: "#FFB800",
+  };
 }
 
 /**
  * 📋 HOOK PARA OBTENER SOLO EL CÓDIGO DE VESTIMENTA
  */
 export function useDressCode() {
-  return clientConfig.codigoVestimenta;
+  return {
+    tema: "¡Disfraz Obligatorio!",
+    descripcion:
+      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+  };
 }
 
-export default useQuinceaneraConfig;
+export default useHalloweenConfig;

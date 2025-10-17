@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Crown, RefreshCw, LogOut } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 import {
   AdminLogin,
   AdminStats,
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
   const [filterType, setFilterType] = useState("all"); // Renombrado de filterGuests
 
   // Usar hook centralizado para configuración
-  const { nombre, adminPassword } = useQuinceaneraConfig();
+  const { nombre, adminPassword } = useHalloweenConfig();
 
   // Validación de contraseña admin
   if (!adminPassword) {

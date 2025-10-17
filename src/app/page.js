@@ -2,7 +2,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
 import CountdownSection from "@/components/CountdownSection";
-import EventDetails from "@/components/EventDetails";
 import DressCode from "@/components/DressCode";
 import MusicRequests from "@/components/MusicRequests";
 import LocationSection from "@/components/LocationSection";
@@ -37,7 +36,7 @@ const MainContent = () => {
           <main className="w-full overflow-x-hidden">
             <HeroSection />
             <CountdownSection />
-            <EventDetails />
+
             <DressCode />
             <LocationSection />
             <MusicRequests />

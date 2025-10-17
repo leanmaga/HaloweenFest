@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Crown } from "lucide-react";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
-// Componente de destellos estilo Ghibli
-const GhibliSparkles = ({ count = 15, colores }) => {
+// Componente de destellos estilo Halloween
+const HalloweenSparkles = ({ count = 15, colores }) => {
   const [sparkles, setSparkles] = useState([]);
 
   useEffect(() => {
-    const colors = [colores.primario[400], colores.terciario[400]];
+    const colors = [colores.naranja, colores.dorado, colores.morado];
     const newSparkles = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -64,15 +63,11 @@ const GhibliSparkles = ({ count = 15, colores }) => {
 };
 
 // Componente de partículas grandes para efectos
-const ColorfulParticles = ({ count = 8, colores }) => {
+const SpookyParticles = ({ count = 8, colores }) => {
   const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    const colors = [
-      colores.primario[400],
-      colores.terciario[400],
-      colores.primario[500],
-    ];
+    const colors = [colores.naranja, colores.dorado, colores.morado];
     const newParticles = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -125,15 +120,15 @@ const ColorfulParticles = ({ count = 8, colores }) => {
 };
 
 export default function HeroSection() {
-  const { nombre, edad, colores } = useQuinceaneraConfig();
+  const { nombreEvento, colores } = useHalloweenConfig();
 
   // Estilos para los textos principales
   const titleStyles = {
     className: "text-6xl md:text-8xl lg:text-9xl font-bold mb-4 relative z-10",
     style: {
       fontFamily: "var(--font-dancing)",
-      color: colores.primario[200],
-      textShadow: `0 0 20px ${colores.primario[400]}, 0 0 40px ${colores.primario[500]}, 0 0 60px ${colores.terciario[400]}, 2px 2px 8px rgba(0,0,0,0.8)`,
+      color: colores.naranja,
+      textShadow: `0 0 20px ${colores.naranja}, 0 0 40px ${colores.morado}, 0 0 60px ${colores.dorado}, 2px 2px 8px rgba(0,0,0,0.9)`,
     },
   };
 
@@ -142,20 +137,20 @@ export default function HeroSection() {
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Fondo base con gradiente rosa dusty claro */}
+      {/* Fondo base con gradiente Halloween */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle at 20% 20%, ${colores.primario[400]}40 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, ${colores.primario[500]}40 0%, transparent 50%),
-            radial-gradient(circle at 40% 60%, ${colores.primario[600]}25 0%, transparent 50%),
-            linear-gradient(135deg, ${colores.primario[50]} 0%, ${colores.secundario[100]} 25%, ${colores.terciario[200]} 75%, ${colores.primario[300]} 100%)
+            radial-gradient(circle at 20% 20%, ${colores.naranja}40 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, ${colores.morado}40 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, ${colores.negro}25 0%, transparent 50%),
+            linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 25%, ${colores.negro} 100%)
           `,
         }}
       />
 
-      {/* Tapiz con opacidad para que se vea sobre el fondo claro */}
+      {/* Tapiz con opacidad para que se vea sobre el fondo */}
       <div
         className="absolute inset-0"
         style={{
@@ -168,24 +163,24 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Overlay sutil para dar profundidad sin oscurecer demasiado */}
+      {/* Overlay sutil para dar profundidad */}
       <div
         className="absolute inset-0"
         style={{
           background: `
             linear-gradient(to bottom, 
-              ${colores.primario[50]}20, 
+              ${colores.negro}20, 
               transparent 30%, 
               transparent 70%, 
-              ${colores.primario[100]}30
+              ${colores.negro}30
             )
           `,
         }}
       />
 
-      {/* Destellos mágicos estilo Ghibli */}
-      <GhibliSparkles count={25} colores={colores} />
-      <ColorfulParticles count={12} colores={colores} />
+      {/* Destellos mágicos estilo Halloween */}
+      <HalloweenSparkles count={25} colores={colores} />
+      <SpookyParticles count={12} colores={colores} />
 
       <div className="text-center z-10 px-4 relative">
         <motion.div
@@ -194,12 +189,26 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="mb-8 relative"
         >
-          <Crown
-            className="w-16 h-16 mx-auto mb-4 animate-bounce drop-shadow-lg"
-            style={{ color: colores.primario[400] }}
-          />
+          {/* Calabaza principal */}
+          <motion.div
+            className="text-8xl mb-8"
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              filter: `drop-shadow(0 0 30px ${colores.naranja})`,
+            }}
+          >
+            🎃
+          </motion.div>
 
-          {/* Contenedor del nombre */}
+          {/* Contenedor del nombre del evento */}
           <div className="relative">
             <motion.h1
               className={titleStyles.className}
@@ -207,8 +216,8 @@ export default function HeroSection() {
               animate={{
                 scale: [1, 1.05, 1],
                 textShadow: [
-                  `0 0 20px ${colores.primario[400]}, 0 0 40px ${colores.primario[500]}, 0 0 60px ${colores.terciario[400]}, 2px 2px 8px rgba(0,0,0,0.8)`,
-                  `0 0 30px ${colores.primario[400]}, 0 0 50px ${colores.primario[500]}, 0 0 70px ${colores.terciario[400]}, 2px 2px 8px rgba(0,0,0,0.8)`,
+                  `0 0 20px ${colores.naranja}, 0 0 40px ${colores.morado}, 0 0 60px ${colores.dorado}, 2px 2px 8px rgba(0,0,0,0.9)`,
+                  `0 0 30px ${colores.naranja}, 0 0 50px ${colores.morado}, 0 0 70px ${colores.dorado}, 2px 2px 8px rgba(0,0,0,0.9)`,
                 ],
               }}
               transition={{
@@ -217,25 +226,24 @@ export default function HeroSection() {
                 ease: "easeInOut",
               }}
             >
-              {nombre}
+              {nombreEvento}
             </motion.h1>
           </div>
 
-          {/* Sección con número 15 entre líneas */}
-          <div className="flex items-center justify-center gap-4 mb-6">
+          {/* Sección con emojis de Halloween entre líneas */}
+          <div className="flex items-center justify-center gap-4 mb-6 mt-8">
             <div
               className="h-px w-24"
               style={{
-                background: `linear-gradient(to right, transparent, ${colores.primario[400]}, transparent)`,
+                background: `linear-gradient(to right, transparent, ${colores.naranja}, transparent)`,
               }}
             />
 
-            {/* Número 15 con efectos especiales */}
+            {/* Emojis Halloween con efectos especiales */}
             <motion.div
-              className="relative"
+              className="relative flex gap-4 text-5xl"
               animate={{
                 scale: [1, 1.1, 1],
-                rotate: [0, 5, -5, 0],
               }}
               transition={{
                 duration: 4,
@@ -244,13 +252,8 @@ export default function HeroSection() {
               }}
             >
               <motion.span
-                className={titleStyles.className}
-                style={titleStyles.style}
                 animate={{
-                  textShadow: [
-                    `0 0 20px ${colores.primario[400]}, 0 0 40px ${colores.primario[500]}, 0 0 60px ${colores.terciario[400]}, 2px 2px 8px rgba(0,0,0,0.8)`,
-                    `0 0 30px ${colores.primario[400]}, 0 0 50px ${colores.primario[500]}, 0 0 70px ${colores.terciario[400]}, 2px 2px 8px rgba(0,0,0,0.8)`,
-                  ],
+                  rotate: [0, 10, -10, 0],
                 }}
                 transition={{
                   duration: 3,
@@ -258,17 +261,44 @@ export default function HeroSection() {
                   ease: "easeInOut",
                 }}
               >
-                {edad}
+                👻
               </motion.span>
 
-              {/* Partículas alrededor del número */}
-              <ColorfulParticles count={6} colores={colores} />
+              <motion.span
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                🦇
+              </motion.span>
+
+              <motion.span
+                animate={{
+                  rotate: [0, -10, 10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+              >
+                💀
+              </motion.span>
+
+              {/* Partículas alrededor de los emojis */}
+              <SpookyParticles count={6} colores={colores} />
             </motion.div>
 
             <div
               className="h-px w-24"
               style={{
-                background: `linear-gradient(to right, transparent, ${colores.primario[400]}, transparent)`,
+                background: `linear-gradient(to right, transparent, ${colores.naranja}, transparent)`,
               }}
             />
           </div>
@@ -280,10 +310,14 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-8 relative"
         >
-          {/* "AÑOS" con los mismos estilos que el nombre */}
-          <motion.h1
-            className={titleStyles.className}
-            style={titleStyles.style}
+          {/* Fecha con los mismos estilos */}
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+            style={{
+              fontFamily: "var(--font-dancing)",
+              color: colores.dorado,
+              textShadow: `0 0 20px ${colores.dorado}, 0 0 40px ${colores.naranja}, 2px 2px 8px rgba(0,0,0,0.9)`,
+            }}
             animate={{
               scale: [1, 1.02, 1],
             }}
@@ -293,14 +327,13 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            Años
-          </motion.h1>
+            01 de Noviembre
+          </motion.h2>
 
           <motion.p
-            className="text-xl md:text-2xl font-light relative z-10"
+            className="text-xl md:text-2xl font-light relative z-10 text-orange-300"
             style={{
-              color: colores.primario[100],
-              textShadow: `2px 2px 4px rgba(0,0,0,0.8), 0 0 15px ${colores.primario[400]}`,
+              textShadow: `2px 2px 4px rgba(0,0,0,0.9), 0 0 15px ${colores.naranja}`,
             }}
             animate={{
               opacity: [0.8, 1, 0.8],
@@ -311,12 +344,39 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            Vení a celebrar conmigo un día mágico
+            Vení a celebrar una noche de terror y diversión
           </motion.p>
+
+          {/* Emojis adicionales */}
+          <motion.div
+            className="flex justify-center gap-4 mt-6 text-3xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <motion.span
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            >
+              🕷️
+            </motion.span>
+            <motion.span
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              🕸️
+            </motion.span>
+            <motion.span
+              animate={{ rotate: [0, -360] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            >
+              🕷️
+            </motion.span>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Luciérnagas decorativas */}
+      {/* Luciérnagas decorativas con colores Halloween */}
       <motion.div
         className="absolute top-10 left-10"
         animate={{
@@ -334,8 +394,8 @@ export default function HeroSection() {
         <div
           className="w-3 h-3 rounded-full"
           style={{
-            backgroundColor: colores.primario[400],
-            boxShadow: `0 0 15px ${colores.primario[400]}, 0 0 30px ${colores.primario[400]}60`,
+            backgroundColor: colores.naranja,
+            boxShadow: `0 0 15px ${colores.naranja}, 0 0 30px ${colores.naranja}60`,
           }}
         />
       </motion.div>
@@ -357,8 +417,8 @@ export default function HeroSection() {
         <div
           className="w-2 h-2 rounded-full"
           style={{
-            backgroundColor: colores.terciario[300],
-            boxShadow: `0 0 12px ${colores.terciario[300]}, 0 0 24px ${colores.terciario[300]}40`,
+            backgroundColor: colores.morado,
+            boxShadow: `0 0 12px ${colores.morado}, 0 0 24px ${colores.morado}40`,
           }}
         />
       </motion.div>
@@ -380,8 +440,8 @@ export default function HeroSection() {
         <div
           className="w-4 h-4 rounded-full"
           style={{
-            backgroundColor: colores.primario[400],
-            boxShadow: `0 0 18px ${colores.primario[400]}, 0 0 36px ${colores.primario[400]}50`,
+            backgroundColor: colores.dorado,
+            boxShadow: `0 0 18px ${colores.dorado}, 0 0 36px ${colores.dorado}50`,
           }}
         />
       </motion.div>
@@ -404,10 +464,44 @@ export default function HeroSection() {
         <div
           className="w-2.5 h-2.5 rounded-full"
           style={{
-            backgroundColor: colores.terciario[300],
-            boxShadow: `0 0 14px ${colores.terciario[300]}, 0 0 28px ${colores.terciario[300]}40`,
+            backgroundColor: colores.naranja,
+            boxShadow: `0 0 14px ${colores.naranja}, 0 0 28px ${colores.naranja}40`,
           }}
         />
+      </motion.div>
+
+      {/* Emojis flotantes adicionales */}
+      <motion.div
+        className="absolute top-1/3 left-1/4 text-4xl"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 10, -10, 0],
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        👻
+      </motion.div>
+
+      <motion.div
+        className="absolute top-2/3 right-1/4 text-3xl"
+        animate={{
+          y: [0, 15, 0],
+          x: [0, -10, 0],
+          opacity: [0.4, 0.8, 0.4],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      >
+        🦇
       </motion.div>
     </section>
   );

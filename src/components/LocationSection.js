@@ -3,46 +3,52 @@
 import { useState, useEffect } from "react";
 import { MapPin, Phone, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
-import { useLoading } from "@/components/PageLoader"; // ✅ Importar el hook del loader
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function LocationSection() {
   // ✅ Usar configuración centralizada
-  const {
-    lugar,
-    direccion,
-    telefono,
-    horaEvento,
-    googleMapsUrl,
-    wazeUrl,
-    imagenesSalon,
-    colores,
-  } = useQuinceaneraConfig();
+  const config = useHalloweenConfig();
 
-  // ✅ Hook del loader para reportar imágenes
-  const { incrementLoadedImages } = useLoading();
+  console.log("LocationSection - Config:", config);
+  console.log("LocationSection - imagenesSalon:", config.imagenesSalon);
+
+  const {
+    lugar = "Ubicación",
+    direccion = "Dirección no disponible",
+    telefono = "+54 9 11 2271-0612",
+    horaEvento = "20:00 PM - 03:00 AM",
+    googleMapsUrl = "#",
+    wazeUrl = "#",
+    imagenesSalon = ["/assets/1.jpg"],
+    colores,
+  } = config;
 
   // Slider state
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ✅ Reportar carga de imágenes al loader
+  console.log(
+    "LocationSection - Renderizando con",
+    imagenesSalon.length,
+    "imágenes"
+  );
+
+  // Manejo de carga de imágenes
   const handleImageLoad = () => {
-    incrementLoadedImages();
     console.log(`✅ Imagen del salón cargada`);
   };
 
   const handleImageError = (imageSrc) => {
     console.warn(`⚠️ Error al cargar imagen del salón: ${imageSrc}`);
-    incrementLoadedImages(); // También contar las que fallan
   };
 
   // Auto-slide functionality
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % imagenesSalon.length);
-    }, 5000); // Change slide every 5 seconds
-
-    return () => clearInterval(timer);
+    if (imagenesSalon.length > 1) {
+      const timer = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % imagenesSalon.length);
+      }, 5000);
+      return () => clearInterval(timer);
+    }
   }, [imagenesSalon.length]);
 
   const nextSlide = () => {
@@ -64,114 +70,88 @@ export default function LocationSection() {
       id="location"
       className="py-20 min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, ${colores.primario[50]} 0%, ${colores.secundario[50]} 50%, ${colores.primario[100]} 100%)`,
+        background: `linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 50%, ${colores.negro} 100%)`,
       }}
     >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16 location-fade-in-up">
-          <MapPin
-            className="w-12 h-12 mx-auto mb-4"
-            style={{ color: colores.primario[600] }}
-          />
+        <div className="text-center mb-16">
+          <div className="text-6xl mb-4">📍</div>
           <h2
             className="font-serif text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: colores.primario[800] }}
+            style={{
+              color: colores.naranja,
+              textShadow: `0 0 30px ${colores.naranja}`,
+            }}
           >
-            Ubicación del Evento
+            Ubicación de la Fiesta
           </h2>
+          <p className="text-xl text-orange-300">
+            ¡Encuentra el lugar de la celebración más espeluznante! 🎃
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Location Details */}
-          <div className="space-y-8 location-fade-in-left">
+          <div className="space-y-8">
             <div
-              className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-2xl"
+              className="bg-black/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border-2"
               style={{
-                border: `1px solid ${colores.primario[300]}66`,
+                borderColor: colores.naranja,
               }}
             >
               <h3
                 className="font-serif text-3xl font-bold mb-6"
-                style={{ color: colores.primario[800] }}
+                style={{ color: colores.naranja }}
               >
                 {lugar}
               </h3>
 
               <div className="space-y-6">
-                <div
-                  className="flex items-start gap-4 p-4 rounded-2xl transition-colors location-scale-hover"
-                  style={{
-                    ":hover": {
-                      backgroundColor: `${colores.primario[100]}80`,
-                    },
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor = `${colores.primario[100]}80`)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = "transparent")
-                  }
-                >
+                <div className="flex items-start gap-4 p-4 rounded-2xl transition-all hover:bg-orange-900/20">
                   <MapPin
                     className="w-6 h-6 flex-shrink-0 mt-1"
-                    style={{ color: colores.primario[600] }}
+                    style={{ color: colores.naranja }}
                   />
                   <div>
                     <h4
                       className="font-semibold mb-1"
-                      style={{ color: colores.primario[800] }}
+                      style={{ color: colores.dorado }}
                     >
                       Dirección
                     </h4>
-                    <p style={{ color: colores.primario[700] }}>{direccion}</p>
+                    <p className="text-orange-200">{direccion}</p>
                   </div>
                 </div>
 
-                <div
-                  className="flex items-start gap-4 p-4 rounded-2xl transition-colors location-scale-hover"
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor = `${colores.primario[100]}80`)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = "transparent")
-                  }
-                >
+                <div className="flex items-start gap-4 p-4 rounded-2xl transition-all hover:bg-orange-900/20">
                   <Phone
                     className="w-6 h-6 flex-shrink-0 mt-1"
-                    style={{ color: colores.primario[600] }}
+                    style={{ color: colores.naranja }}
                   />
                   <div>
                     <h4
                       className="font-semibold mb-1"
-                      style={{ color: colores.primario[800] }}
+                      style={{ color: colores.dorado }}
                     >
                       Contacto
                     </h4>
-                    <p style={{ color: colores.primario[700] }}>{telefono}</p>
+                    <p className="text-orange-200">{telefono}</p>
                   </div>
                 </div>
 
-                <div
-                  className="flex items-start gap-4 p-4 rounded-2xl transition-colors location-scale-hover"
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor = `${colores.primario[100]}80`)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = "transparent")
-                  }
-                >
+                <div className="flex items-start gap-4 p-4 rounded-2xl transition-all hover:bg-orange-900/20">
                   <Clock
                     className="w-6 h-6 flex-shrink-0 mt-1"
-                    style={{ color: colores.primario[600] }}
+                    style={{ color: colores.naranja }}
                   />
                   <div>
                     <h4
                       className="font-semibold mb-1"
-                      style={{ color: colores.primario[800] }}
+                      style={{ color: colores.dorado }}
                     >
                       Horario
                     </h4>
-                    <p style={{ color: colores.primario[700] }}>
+                    <p className="text-orange-200">
                       Recepción: {horaEvento.split(" - ")[0]}
                       <br />
                       Evento hasta: {horaEvento.split(" - ")[1]}
@@ -190,13 +170,7 @@ export default function LocationSection() {
                   }}
                   onClick={() => window.open(googleMapsUrl, "_blank")}
                 >
-                  <Image
-                    src="/assets/gmaps.png"
-                    alt="Google Maps"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                  />
+                  <MapPin className="w-5 h-5" />
                   Google Maps
                 </button>
 
@@ -209,31 +183,37 @@ export default function LocationSection() {
                   }}
                   onClick={() => window.open(wazeUrl, "_blank")}
                 >
-                  <Image
-                    src="/assets/waze.png"
-                    alt="Waze"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                  />
+                  <MapPin className="w-5 h-5" />
                   Waze
                 </button>
+              </div>
+
+              {/* Decoración Halloween */}
+              <div className="mt-6 flex justify-center gap-4 text-3xl">
+                <span className="animate-bounce">🎃</span>
+                <span className="animate-pulse">👻</span>
+                <span
+                  className="animate-bounce"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  🦇
+                </span>
               </div>
             </div>
           </div>
 
           {/* Image Slider */}
-          <div className="relative location-fade-in-right">
+          <div className="relative">
             <div
-              className="aspect-square lg:aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative"
+              className="aspect-square lg:aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative border-4"
               style={{
-                background: `linear-gradient(135deg, ${colores.primario[100]}, ${colores.secundario[100]})`,
+                background: `linear-gradient(135deg, ${colores.naranja}30, ${colores.morado}30)`,
+                borderColor: colores.naranja,
               }}
             >
-              {/* Image Container */}
               <div className="relative w-full h-full overflow-hidden">
                 <div
-                  className="flex h-full location-slide-transition"
+                  className="flex h-full transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
                   {imagenesSalon.map((image, index) => (
@@ -243,76 +223,122 @@ export default function LocationSection() {
                     >
                       <Image
                         src={image}
-                        alt={`Imagen del salón ${index + 1}`}
+                        alt={`Imagen del lugar ${index + 1}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
-                        className="w-full h-full object-cover"
+                        className="object-cover"
                         onLoad={handleImageLoad}
                         onError={() => handleImageError(image)}
-                        priority={true}
+                        priority={index === 0}
+                      />
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          background: `linear-gradient(to bottom, transparent 0%, ${colores.negro}80 100%)`,
+                        }}
                       />
                     </div>
                   ))}
                 </div>
 
-                {/* Navigation Arrows */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 z-20"
-                  aria-label="Imagen anterior"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300 hover:scale-110 z-20"
-                  aria-label="Siguiente imagen"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-
-                {/* Dots Indicator */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                  {imagenesSalon.map((_, index) => (
+                {/* Navigation Arrows - solo si hay más de 1 imagen */}
+                {imagenesSalon.length > 1 && (
+                  <>
                     <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentSlide
-                          ? "bg-white scale-125 shadow-lg"
-                          : "bg-white/60 hover:bg-white/80"
-                      }`}
-                      aria-label={`Ir a imagen ${index + 1}`}
-                    />
-                  ))}
-                </div>
+                      onClick={prevSlide}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 z-20 border-2"
+                      style={{
+                        background: `${colores.naranja}cc`,
+                        borderColor: colores.dorado,
+                      }}
+                      aria-label="Imagen anterior"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
 
-                {/* Image Counter */}
-                <div className="absolute top-4 right-4 bg-black/40 text-white px-3 py-1 rounded-full text-sm font-medium z-20">
-                  {currentSlide + 1} / {imagenesSalon.length}
-                </div>
+                    <button
+                      onClick={nextSlide}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 z-20 border-2"
+                      style={{
+                        background: `${colores.naranja}cc`,
+                        borderColor: colores.dorado,
+                      }}
+                      aria-label="Siguiente imagen"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
 
-                {/* Overlay with salon info */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 z-20">
+                    {/* Dots Indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                      {imagenesSalon.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToSlide(index)}
+                          className={`w-3 h-3 rounded-full transition-all duration-300 border-2 ${
+                            index === currentSlide
+                              ? "scale-125 shadow-lg"
+                              : "hover:scale-110"
+                          }`}
+                          style={{
+                            backgroundColor:
+                              index === currentSlide
+                                ? colores.naranja
+                                : "transparent",
+                            borderColor: colores.naranja,
+                          }}
+                          aria-label={`Ir a imagen ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Image Counter */}
+                    <div
+                      className="absolute top-4 right-4 text-white px-4 py-2 rounded-full text-sm font-bold z-20 border-2"
+                      style={{
+                        background: `${colores.negro}cc`,
+                        borderColor: colores.naranja,
+                      }}
+                    >
+                      {currentSlide + 1} / {imagenesSalon.length}
+                    </div>
+                  </>
+                )}
+
+                {/* Overlay with info */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 p-6 z-20"
+                  style={{
+                    background: `linear-gradient(to top, ${colores.negro}dd, transparent)`,
+                  }}
+                >
                   <div className="text-white">
-                    <h3 className="font-serif text-xl font-bold mb-1">
+                    <h3
+                      className="font-serif text-xl font-bold mb-1"
+                      style={{ color: colores.naranja }}
+                    >
                       {lugar}
                     </h3>
-                    <p className="text-sm opacity-90">
-                      Conoce nuestras instalaciones
+                    <p className="text-sm text-orange-300">
+                      🎃 Conoce el lugar de la fiesta
                     </p>
                   </div>
                 </div>
 
-                {/* Decorative elements */}
-                <div className="absolute top-4 left-4 z-20">
-                  <div
-                    className="w-8 h-8 border-2 border-dashed rounded-full location-rotate-element"
-                    style={{ borderColor: "rgba(255, 255, 255, 0.4)" }}
-                  />
+                {/* Decorative Halloween elements */}
+                <div className="absolute top-4 left-4 z-20 text-3xl animate-bounce">
+                  🎃
+                </div>
+                <div className="absolute top-4 right-20 z-20 text-2xl animate-pulse">
+                  👻
                 </div>
               </div>
+            </div>
+
+            {/* Texto decorativo debajo del slider */}
+            <div className="text-center mt-4">
+              <p className="text-orange-300 font-semibold">
+                🕷️ Un lugar perfecto para la noche más terrorífica 🕷️
+              </p>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import {
   Music,
-  Heart,
   Send,
   Headphones,
   Loader2,
@@ -11,7 +10,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function MusicRequests() {
   const [songRequest, setSongRequest] = useState("");
@@ -25,7 +24,7 @@ export default function MusicRequests() {
   const [loadingSongs, setLoadingSongs] = useState(true);
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const { colores } = useQuinceaneraConfig();
+  const { colores } = useHalloweenConfig();
 
   useEffect(() => {
     loadSongs();
@@ -148,7 +147,7 @@ export default function MusicRequests() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${colores.primario[900]}99, ${colores.primario[800]}b3, ${colores.primario[700]}cc)`,
+                    background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
                   }}
                 />
 
@@ -158,50 +157,41 @@ export default function MusicRequests() {
                       <div
                         className="w-24 h-24 rounded-full blur-2xl animate-pulse"
                         style={{
-                          background: `linear-gradient(135deg, ${colores.primario[400]}80, ${colores.terciario[400]}80)`,
+                          background: `linear-gradient(135deg, ${colores.naranja}80, ${colores.dorado}80)`,
                         }}
                       />
                     </div>
-                    <Music
-                      className="w-12 h-12 relative z-10"
-                      style={{ color: colores.primario[100] }}
-                    />
+                    <Music className="w-12 h-12 relative z-10 text-white" />
                     <div className="absolute -top-2 -right-2 music-rotate-sparkles">
-                      <Sparkles
-                        className="w-6 h-6"
-                        style={{ color: colores.terciario[300] }}
-                      />
+                      <div className="text-2xl">🎃</div>
                     </div>
                   </div>
 
                   <h2
-                    className="font-bold text-4xl sm:text-5xl mb-6 leading-tight"
+                    className="font-bold text-4xl sm:text-5xl mb-6 leading-tight text-white"
                     style={{
-                      color: colores.primario[100],
-                      textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                      textShadow: `0 0 20px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                     }}
                   >
-                    Pide tu Canción
+                    🎵 Playlist Espeluznante 🎵
                     <br />
-                    <span className="text-3xl sm:text-4xl">Favorita</span>
+                    <span className="text-3xl sm:text-4xl">
+                      ¡Pide tu Canción!
+                    </span>
                   </h2>
 
-                  <p
-                    className="text-lg mb-12 font-medium drop-shadow-lg"
-                    style={{ color: `${colores.primario[100]}e6` }}
-                  >
-                    Ayúdanos a crear la playlist perfecta
+                  <p className="text-lg mb-12 font-medium drop-shadow-lg text-white/90">
+                    Ayúdanos a crear la banda sonora perfecta
                     <br />
-                    ¡Tu canción favorita puede ser la que haga bailar a todos!
+                    ¡Tu canción podría hacer bailar a todos en la pista! 🕺💃
                   </p>
 
                   <button
                     onClick={() => setIsFlipped(true)}
-                    className="music-golden-button px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center gap-3 mx-auto"
+                    className="music-golden-button px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center gap-3 mx-auto text-black"
                     style={{
-                      background: `linear-gradient(135deg, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.primario[600]})`,
-                      color: colores.primario[900],
-                      boxShadow: `0 8px 32px ${colores.primario[400]}4d`,
+                      background: `linear-gradient(135deg, ${colores.naranja}, ${colores.dorado})`,
+                      boxShadow: `0 8px 32px ${colores.naranja}4d`,
                     }}
                   >
                     <Music className="w-6 h-6" />
@@ -216,32 +206,20 @@ export default function MusicRequests() {
               <div
                 className="h-screen flex items-center justify-center overflow-y-auto"
                 style={{
-                  background: `linear-gradient(135deg, ${colores.primario[50]}, ${colores.secundario[50]}, ${colores.primario[100]})`,
+                  background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
                 }}
               >
                 <div className="w-full max-w-lg px-6 py-8">
                   {!showForm ? (
                     <div className="space-y-6">
                       <div className="flex items-center justify-between mb-4">
-                        <h3
-                          className="font-bold text-lg flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
+                        <h3 className="font-bold text-lg flex items-center gap-2 text-orange-400">
                           <Music className="w-5 h-5" />
-                          Playlist de la Fiesta
+                          Playlist de la Fiesta 🎃
                         </h3>
                         <button
                           onClick={handleFlipBack}
-                          className="transition-colors"
-                          style={{ color: colores.primario[600] }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.color =
-                              colores.primario[800])
-                          }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.color =
-                              colores.primario[600])
-                          }
+                          className="transition-colors text-orange-400 hover:text-orange-300"
                         >
                           <svg
                             className="w-6 h-6"
@@ -262,32 +240,25 @@ export default function MusicRequests() {
                       <div className="text-center">
                         <button
                           onClick={handleShowForm}
-                          className="inline-flex items-center gap-3 rounded-full px-6 py-3 font-bold text-lg shadow-2xl hover:scale-105 transition-transform"
+                          className="inline-flex items-center gap-3 rounded-full px-6 py-3 font-bold text-lg shadow-2xl hover:scale-105 transition-transform text-black"
                           style={{
-                            background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                            color: colores.primario[900],
+                            background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                           }}
                         >
                           <Music className="w-5 h-5" />
-                          Agregar Mi Canción
+                          Agregar Mi Canción 👻
                         </button>
                       </div>
 
                       <div className="text-center">
                         <div
-                          className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm rounded-full px-6 py-3"
+                          className="inline-flex items-center gap-3 bg-black/60 backdrop-blur-sm rounded-full px-6 py-3 border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}66`,
+                            borderColor: colores.naranja,
                           }}
                         >
-                          <Headphones
-                            className="w-5 h-5"
-                            style={{ color: colores.primario[700] }}
-                          />
-                          <span
-                            className="font-semibold"
-                            style={{ color: colores.primario[800] }}
-                          >
+                          <Headphones className="w-5 h-5 text-orange-500" />
+                          <span className="font-semibold text-white">
                             {loadingSongs
                               ? "Cargando..."
                               : getSongsCountText(dbSongs.length)}{" "}
@@ -298,22 +269,16 @@ export default function MusicRequests() {
 
                       {loadingSongs ? (
                         <div className="flex items-center justify-center py-8">
-                          <Loader2
-                            className="w-8 h-8 animate-spin"
-                            style={{ color: colores.primario[600] }}
-                          />
+                          <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
                         </div>
                       ) : dbSongs.length > 0 ? (
                         <div
-                          className="bg-white/40 backdrop-blur-sm rounded-2xl p-4"
+                          className="bg-black/60 backdrop-blur-sm rounded-2xl p-4 border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}66`,
+                            borderColor: `${colores.morado}80`,
                           }}
                         >
-                          <h4
-                            className="font-bold text-sm mb-3 flex items-center gap-2"
-                            style={{ color: colores.primario[800] }}
-                          >
+                          <h4 className="font-bold text-sm mb-3 flex items-center gap-2 text-orange-400">
                             <Music className="w-4 h-4" />
                             Últimas Canciones
                           </h4>
@@ -321,35 +286,26 @@ export default function MusicRequests() {
                             {dbSongs.slice(0, 8).map((song, index) => (
                               <div
                                 key={song.id}
-                                className="flex items-center gap-2 p-3 bg-white/30 rounded-lg transition-opacity duration-300 music-fade-in-up"
+                                className="flex items-center gap-2 p-3 bg-orange-900/30 rounded-lg transition-opacity duration-300 music-fade-in-up border border-orange-500/30"
                                 style={{ animationDelay: `${index * 100}ms` }}
                               >
                                 <div
                                   className="w-2 h-2 rounded-full flex-shrink-0"
                                   style={{
-                                    background: `linear-gradient(to right, ${colores.primario[500]}, ${colores.terciario[400]})`,
+                                    background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                                   }}
                                 />
                                 <div className="flex-1 min-w-0">
-                                  <p
-                                    className="font-medium truncate text-sm"
-                                    style={{ color: colores.primario[900] }}
-                                  >
+                                  <p className="font-medium truncate text-sm text-orange-100">
                                     {song.song_name}
                                   </p>
                                   {song.artist_name && (
-                                    <p
-                                      className="text-xs truncate"
-                                      style={{ color: colores.primario[700] }}
-                                    >
+                                    <p className="text-xs truncate text-orange-300">
                                       {song.artist_name}
                                     </p>
                                   )}
                                   {song.message && (
-                                    <p
-                                      className="text-xs truncate italic mt-1"
-                                      style={{ color: colores.primario[600] }}
-                                    >
+                                    <p className="text-xs truncate italic mt-1 text-orange-400">
                                       {song.message}
                                     </p>
                                   )}
@@ -360,67 +316,57 @@ export default function MusicRequests() {
                         </div>
                       ) : (
                         <div className="text-center py-8">
-                          <Music
-                            className="w-12 h-12 mx-auto mb-4 opacity-60"
-                            style={{ color: colores.primario[400] }}
-                          />
-                          <p style={{ color: colores.primario[600] }}>
-                            Aún no hay canciones solicitadas. ¡Sé el primero!
+                          <Music className="w-12 h-12 mx-auto mb-4 opacity-60 text-orange-500" />
+                          <p className="text-orange-300">
+                            Aún no hay canciones solicitadas. ¡Sé el primero! 🎃
                           </p>
                         </div>
                       )}
                     </div>
                   ) : (
                     <div
-                      className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 relative shadow-2xl"
+                      className="bg-black/80 backdrop-blur-xl rounded-3xl p-6 relative shadow-2xl border-2"
                       style={{
-                        border: `1px solid ${colores.primario[300]}66`,
+                        borderColor: colores.naranja,
                       }}
                     >
                       <button
                         onClick={handleCloseForm}
-                        className="absolute top-4 right-4 w-8 h-8 bg-white/40 hover:bg-white/60 rounded-full flex items-center justify-center transition-all text-sm hover:rotate-90"
-                        style={{ color: colores.primario[800] }}
+                        className="absolute top-4 right-4 w-8 h-8 bg-orange-900/40 hover:bg-orange-800/60 rounded-full flex items-center justify-center transition-all text-sm hover:rotate-90 text-orange-300"
                       >
                         ✕
                       </button>
 
                       <div className="mb-4">
-                        <h3
-                          className="font-bold text-lg flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
+                        <h3 className="font-bold text-lg flex items-center gap-2 text-orange-400">
                           <Music className="w-5 h-5" />
-                          Tu Canción Favorita
+                          Tu Canción Favorita 🎃
                         </h3>
                       </div>
 
                       {!submitted ? (
                         <div className="space-y-4">
                           {error && (
-                            <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-700">
+                            <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-400">
                               <AlertCircle className="w-4 h-4" />
                               <span className="text-xs">{error}</span>
                             </div>
                           )}
 
                           <div>
-                            <label
-                              className="block font-medium mb-2 text-sm"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-sm text-orange-300">
                               Nombre de la Canción *
                             </label>
                             <input
                               type="text"
                               value={songRequest}
                               onChange={(e) => setSongRequest(e.target.value)}
-                              className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm"
+                              className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
+                                focusRing: colores.naranja,
                               }}
-                              placeholder="Ej: Soy Cordobés"
+                              placeholder="Ej: Thriller - Michael Jackson"
                               disabled={loading}
                               onKeyPress={(e) =>
                                 e.key === "Enter" && handleSubmit()
@@ -429,22 +375,18 @@ export default function MusicRequests() {
                           </div>
 
                           <div>
-                            <label
-                              className="block font-medium mb-2 text-sm"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-sm text-orange-300">
                               Artista
                             </label>
                             <input
                               type="text"
                               value={artistRequest}
                               onChange={(e) => setArtistRequest(e.target.value)}
-                              className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm"
+                              className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
                               }}
-                              placeholder="Ej: Rodrigo"
+                              placeholder="Ej: Michael Jackson"
                               disabled={loading}
                               onKeyPress={(e) =>
                                 e.key === "Enter" && handleSubmit()
@@ -453,20 +395,16 @@ export default function MusicRequests() {
                           </div>
 
                           <div>
-                            <label
-                              className="block font-medium mb-2 text-sm"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-sm text-orange-300">
                               Mensaje Especial (Opcional)
                             </label>
                             <textarea
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
                               rows={2}
-                              className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none text-sm"
+                              className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none text-sm text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
                               }}
                               placeholder="¿Por qué es especial esta canción?"
                               disabled={loading}
@@ -476,10 +414,9 @@ export default function MusicRequests() {
                           <button
                             onClick={handleSubmit}
                             disabled={loading || !songRequest.trim()}
-                            className="w-full px-4 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-105"
+                            className="w-full px-4 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-105 text-black"
                             style={{
-                              background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                              color: colores.primario[900],
+                              background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                             }}
                           >
                             {loading ? (
@@ -494,22 +431,13 @@ export default function MusicRequests() {
                         </div>
                       ) : (
                         <div className="text-center py-4">
-                          <Heart
-                            className="w-12 h-12 mx-auto mb-3 animate-pulse"
-                            style={{ color: colores.primario[600] }}
-                          />
-                          <h4
-                            className="font-bold text-lg mb-2"
-                            style={{ color: colores.primario[800] }}
-                          >
+                          <div className="text-5xl mb-3 animate-bounce">🎃</div>
+                          <h4 className="font-bold text-lg mb-2 text-orange-400">
                             ¡Canción Agregada!
                           </h4>
-                          <p
-                            className="text-sm"
-                            style={{ color: colores.primario[700] }}
-                          >
+                          <p className="text-sm text-orange-300">
                             Tu canción ya está en la lista. ¡Esperamos que suene
-                            durante la fiesta!
+                            durante la fiesta! 👻
                           </p>
                         </div>
                       )}
@@ -538,7 +466,7 @@ export default function MusicRequests() {
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${colores.primario[900]}99, ${colores.primario[800]}b3, ${colores.primario[700]}cc)`,
+              background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
             }}
           />
         </div>
@@ -547,7 +475,7 @@ export default function MusicRequests() {
         <div
           className="absolute inset-y-0 right-0 w-1/2"
           style={{
-            background: `linear-gradient(135deg, ${colores.primario[50]}, ${colores.secundario[50]}, ${colores.primario[100]})`,
+            background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
           }}
         />
 
@@ -563,36 +491,33 @@ export default function MusicRequests() {
                       <div
                         className="w-24 h-24 rounded-full blur-2xl animate-pulse"
                         style={{
-                          background: `linear-gradient(135deg, ${colores.primario[400]}80, ${colores.terciario[400]}80)`,
+                          background: `linear-gradient(135deg, ${colores.naranja}80, ${colores.dorado}80)`,
                         }}
                       />
                     </div>
                     <Music className="w-12 h-12 text-white relative z-10" />
-                    <div className="absolute -top-2 -right-2 music-rotate-sparkles">
-                      <Sparkles
-                        className="w-6 h-6"
-                        style={{ color: colores.terciario[300] }}
-                      />
+                    <div className="absolute -top-2 -right-2 text-3xl animate-bounce">
+                      🎃
                     </div>
                   </div>
 
                   <h2
                     className="font-bold text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight"
                     style={{
-                      textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                      textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                     }}
                   >
-                    Pide tu Canción
+                    Playlist Espeluznante
                     <br />
                     <span className="text-4xl md:text-5xl lg:text-6xl">
-                      Favorita
+                      ¡Pide tu Canción! 🎵
                     </span>
                   </h2>
 
                   <p className="text-xl text-white/90 max-w-lg mx-auto lg:mx-0 mb-8 font-medium drop-shadow-lg">
-                    Ayúdanos a crear la playlist perfecta
+                    Ayúdanos a crear la banda sonora perfecta
                     <br />
-                    ¡Tu canción favorita puede ser la que haga bailar a todos!
+                    ¡Tu canción podría hacer bailar a todos en la pista! 🕺💃
                   </p>
                 </div>
               </div>
@@ -605,33 +530,26 @@ export default function MusicRequests() {
                       <div className="text-center">
                         <button
                           onClick={handleShowForm}
-                          className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-bold text-xl shadow-2xl hover:scale-105 transition-transform"
+                          className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-bold text-xl shadow-2xl hover:scale-105 transition-transform text-black"
                           style={{
-                            background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                            color: colores.primario[900],
-                            border: `1px solid ${colores.primario[300]}66`,
+                            background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
+                            border: `2px solid ${colores.naranja}`,
                           }}
                         >
                           <Music className="w-6 h-6" />
-                          <span>Agregar Mi Canción</span>
+                          <span>Agregar Mi Canción 👻</span>
                         </button>
                       </div>
 
                       <div className="text-center">
                         <div
-                          className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm rounded-full px-8 py-4"
+                          className="inline-flex items-center gap-3 bg-black/60 backdrop-blur-sm rounded-full px-8 py-4 border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}66`,
+                            borderColor: colores.naranja,
                           }}
                         >
-                          <Headphones
-                            className="w-6 h-6"
-                            style={{ color: colores.primario[700] }}
-                          />
-                          <span
-                            className="font-semibold text-xl"
-                            style={{ color: colores.primario[800] }}
-                          >
+                          <Headphones className="w-6 h-6 text-orange-500" />
+                          <span className="font-semibold text-xl text-white">
                             {loadingSongs
                               ? "Cargando..."
                               : getSongsCountText(dbSongs.length)}{" "}
@@ -641,25 +559,19 @@ export default function MusicRequests() {
                       </div>
 
                       <div
-                        className="bg-white/40 backdrop-blur-sm rounded-2xl p-6"
+                        className="bg-black/60 backdrop-blur-sm rounded-2xl p-6 border-2"
                         style={{
-                          border: `1px solid ${colores.primario[300]}66`,
+                          borderColor: `${colores.morado}80`,
                         }}
                       >
-                        <h3
-                          className="font-bold text-xl mb-4 flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
+                        <h3 className="font-bold text-xl mb-4 flex items-center gap-2 text-orange-400">
                           <Music className="w-6 h-6" />
-                          Canciones Solicitadas
+                          Canciones Solicitadas 🎃
                         </h3>
 
                         {loadingSongs ? (
                           <div className="flex items-center justify-center py-8">
-                            <Loader2
-                              className="w-8 h-8 animate-spin"
-                              style={{ color: colores.primario[600] }}
-                            />
+                            <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
                           </div>
                         ) : dbSongs.length > 0 ? (
                           <div
@@ -669,45 +581,32 @@ export default function MusicRequests() {
                             {dbSongs.map((song, index) => (
                               <div
                                 key={song.id}
-                                className="p-3 bg-white/30 rounded-xl hover:bg-white/50 transition-all cursor-pointer group music-fade-in-up"
+                                className="p-3 bg-orange-900/30 rounded-xl hover:bg-orange-800/40 transition-all cursor-pointer group music-fade-in-up border border-orange-500/30"
                                 style={{ animationDelay: `${index * 100}ms` }}
                               >
                                 <div className="flex items-start gap-3">
-                                  <Music
-                                    className="w-4 h-4 flex-shrink-0 mt-1 group-hover:text-yellow-700 transition-colors"
-                                    style={{ color: colores.primario[600] }}
-                                  />
+                                  <Music className="w-4 h-4 flex-shrink-0 mt-1 group-hover:text-orange-300 transition-colors text-orange-500" />
                                   <div className="flex-1 min-w-0">
-                                    <p
-                                      className="font-medium truncate group-hover:text-yellow-800 transition-colors"
-                                      style={{ color: colores.primario[900] }}
-                                    >
+                                    <p className="font-medium truncate group-hover:text-orange-200 transition-colors text-orange-100">
                                       {song.song_name}
                                     </p>
                                     {song.artist_name && (
-                                      <p
-                                        className="text-sm truncate"
-                                        style={{ color: colores.primario[700] }}
-                                      >
+                                      <p className="text-sm truncate text-orange-300">
                                         {song.artist_name}
                                       </p>
                                     )}
                                     {song.message && (
                                       <div
-                                        className="text-xs mt-1 italic music-scrollbar overflow-y-auto"
+                                        className="text-xs mt-1 italic music-scrollbar overflow-y-auto text-orange-400"
                                         style={{
                                           maxHeight: "40px",
-                                          color: colores.primario[600],
                                         }}
                                         title={song.message}
                                       >
                                         {song.message}
                                       </div>
                                     )}
-                                    <p
-                                      className="text-xs mt-1"
-                                      style={{ color: colores.primario[500] }}
-                                    >
+                                    <p className="text-xs mt-1 text-orange-500">
                                       {new Date(
                                         song.created_at
                                       ).toLocaleDateString("es-ES", {
@@ -724,12 +623,10 @@ export default function MusicRequests() {
                           </div>
                         ) : (
                           <div className="text-center py-12">
-                            <Music
-                              className="w-12 h-12 mx-auto mb-4 opacity-60"
-                              style={{ color: colores.primario[400] }}
-                            />
-                            <p style={{ color: colores.primario[600] }}>
+                            <Music className="w-12 h-12 mx-auto mb-4 opacity-60 text-orange-500" />
+                            <p className="text-orange-300">
                               Aún no hay canciones solicitadas. ¡Sé el primero!
+                              🎃
                             </p>
                           </div>
                         )}
@@ -737,55 +634,47 @@ export default function MusicRequests() {
                     </div>
                   ) : (
                     <div
-                      className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 relative shadow-2xl"
+                      className="bg-black/80 backdrop-blur-xl rounded-3xl p-8 relative shadow-2xl border-2"
                       style={{
-                        border: `1px solid ${colores.primario[300]}66`,
+                        borderColor: colores.naranja,
                       }}
                     >
                       <button
                         onClick={handleCloseForm}
-                        className="absolute top-4 right-4 w-10 h-10 bg-white/40 hover:bg-white/60 rounded-full flex items-center justify-center transition-all text-xl hover:rotate-90"
-                        style={{ color: colores.primario[800] }}
+                        className="absolute top-4 right-4 w-10 h-10 bg-orange-900/40 hover:bg-orange-800/60 rounded-full flex items-center justify-center transition-all text-xl hover:rotate-90 text-orange-300"
                       >
                         ✕
                       </button>
 
                       <div className="mb-6">
-                        <h3
-                          className="font-bold text-2xl flex items-center gap-3"
-                          style={{ color: colores.primario[800] }}
-                        >
+                        <h3 className="font-bold text-2xl flex items-center gap-3 text-orange-400">
                           <Music className="w-8 h-8" />
-                          Solicita una Canción
+                          Solicita una Canción 🎃
                         </h3>
                       </div>
 
                       {!submitted ? (
                         <div className="space-y-6">
                           {error && (
-                            <div className="p-4 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-700">
+                            <div className="p-4 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-400">
                               <AlertCircle className="w-5 h-5" />
                               <span>{error}</span>
                             </div>
                           )}
 
                           <div>
-                            <label
-                              className="block font-medium mb-2"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-orange-300">
                               Nombre de la Canción *
                             </label>
                             <input
                               type="text"
                               value={songRequest}
                               onChange={(e) => setSongRequest(e.target.value)}
-                              className="w-full px-4 py-3 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all"
+                              className="w-full px-4 py-3 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
                               }}
-                              placeholder="Ej: Soy Cordobés"
+                              placeholder="Ej: Thriller - Michael Jackson"
                               disabled={loading}
                               onKeyPress={(e) =>
                                 e.key === "Enter" && handleSubmit()
@@ -794,22 +683,18 @@ export default function MusicRequests() {
                           </div>
 
                           <div>
-                            <label
-                              className="block font-medium mb-2"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-orange-300">
                               Artista
                             </label>
                             <input
                               type="text"
                               value={artistRequest}
                               onChange={(e) => setArtistRequest(e.target.value)}
-                              className="w-full px-4 py-3 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all"
+                              className="w-full px-4 py-3 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
                               }}
-                              placeholder="Ej: Rodrigo"
+                              placeholder="Ej: Michael Jackson"
                               disabled={loading}
                               onKeyPress={(e) =>
                                 e.key === "Enter" && handleSubmit()
@@ -818,20 +703,16 @@ export default function MusicRequests() {
                           </div>
 
                           <div>
-                            <label
-                              className="block font-medium mb-2"
-                              style={{ color: colores.primario[800] }}
-                            >
+                            <label className="block font-medium mb-2 text-orange-300">
                               Mensaje Especial (Opcional)
                             </label>
                             <textarea
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
                               rows={3}
-                              className="w-full px-4 py-3 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none"
+                              className="w-full px-4 py-3 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none text-white border-2"
                               style={{
-                                border: `1px solid ${colores.primario[300]}80`,
-                                color: colores.primario[900],
+                                borderColor: `${colores.naranja}80`,
                               }}
                               placeholder="¿Por qué es especial esta canción para ti?"
                               disabled={loading}
@@ -841,10 +722,9 @@ export default function MusicRequests() {
                           <button
                             onClick={handleSubmit}
                             disabled={loading || !songRequest.trim()}
-                            className="w-full px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:scale-105"
+                            className="w-full px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:scale-105 text-black"
                             style={{
-                              background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                              color: colores.primario[900],
+                              background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                             }}
                           >
                             {loading ? (
@@ -857,22 +737,13 @@ export default function MusicRequests() {
                         </div>
                       ) : (
                         <div className="text-center py-8">
-                          <Heart
-                            className="w-16 h-16 mx-auto mb-4 animate-pulse"
-                            style={{ color: colores.primario[600] }}
-                          />
-                          <h4
-                            className="font-bold text-2xl mb-3"
-                            style={{ color: colores.primario[800] }}
-                          >
+                          <div className="text-7xl mb-4 animate-bounce">🎃</div>
+                          <h4 className="font-bold text-2xl mb-3 text-orange-400">
                             ¡Canción Agregada Exitosamente!
                           </h4>
-                          <p
-                            className="mb-4"
-                            style={{ color: colores.primario[700] }}
-                          >
+                          <p className="mb-4 text-orange-300">
                             Tu canción aparece ahora en la lista. ¡Esperamos que
-                            suene durante la fiesta!
+                            suene durante la fiesta! 👻
                           </p>
                         </div>
                       )}

@@ -6,14 +6,12 @@ import {
   User,
   Phone,
   Utensils,
-  Heart,
   Loader2,
   AlertCircle,
   CheckCircle,
-  Sparkles,
   Calendar,
 } from "lucide-react";
-import { useQuinceaneraConfig } from "@/hooks/useQuinceaneraConfig";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 import { supabase } from "@/lib/supabase";
 
 export default function RSVPSection() {
@@ -30,8 +28,8 @@ export default function RSVPSection() {
   const [checkingExisting, setCheckingExisting] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const { nombre, whatsapp, telefono, fechaLimiteRSVP, colores } =
-    useQuinceaneraConfig();
+  const { nombreEvento, whatsapp, telefono, fechaLimiteRSVP, colores } =
+    useHalloweenConfig();
 
   if (!whatsapp) {
     console.error(
@@ -105,7 +103,7 @@ export default function RSVPSection() {
   };
 
   const formatWhatsAppMessage = (data) => {
-    let message = `🎉 *CONFIRMACIÓN DE ASISTENCIA - QUINCEAÑERA ${nombre.toUpperCase()}*\n\n`;
+    let message = `🎃 *CONFIRMACIÓN DE ASISTENCIA - HALLOWEEN PARTY 2025*\n\n`;
     message += `👤 *Nombre:* ${data.name}\n`;
     message += `📱 *Teléfono:* ${data.phone || "No proporcionado"}\n`;
 
@@ -114,7 +112,7 @@ export default function RSVPSection() {
     }
 
     if (data.message) {
-      message += `💌 *Mensaje para ${nombre}:* ${data.message}\n`;
+      message += `💀 *Mensaje:* ${data.message}\n`;
     }
 
     message += `\n📅 *Fecha:* ${new Date().toLocaleDateString("es-ES", {
@@ -188,94 +186,74 @@ export default function RSVPSection() {
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(135deg, ${colores.primario[50]}e6, ${colores.secundario[50]}d9, ${colores.primario[100]}cc)`,
+                background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
               }}
             />
 
             <div className="relative z-10 text-center max-w-lg mx-auto px-6 rsvp-fade-in-up">
               <div className="flex justify-center mb-8">
-                <div className="rsvp-bounce-icon">
-                  {isExisting ? (
-                    <CheckCircle
-                      className="w-20 h-20"
-                      style={{ color: colores.primario[600] }}
-                    />
-                  ) : (
-                    <Heart
-                      className="w-20 h-20"
-                      style={{ color: colores.primario[600] }}
-                    />
-                  )}
+                <div className="rsvp-bounce-icon text-7xl">
+                  {isExisting ? "✅" : "🎃"}
                 </div>
               </div>
 
               <h2
                 className="font-bold text-4xl sm:text-5xl mb-6 leading-tight"
                 style={{
-                  color: colores.primario[800],
-                  textShadow: `0 4px 20px ${colores.primario[600]}4d`,
+                  color: colores.naranja,
+                  textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                 }}
               >
                 {isExisting ? "¡Ya Confirmaste!" : "¡Confirmación Enviada!"}
               </h2>
 
-              <p
-                className="text-lg max-w-lg mx-auto mb-8 font-medium"
-                style={{ color: `${colores.primario[900]}cc` }}
-              >
+              <p className="text-lg max-w-lg mx-auto mb-8 font-medium text-orange-200">
                 {isExisting
-                  ? `Hola ${rsvpData.name}, ya confirmaste tu asistencia para la fiesta de ${nombre}. ¡Te esperamos!`
-                  : `Tu confirmación se envió por WhatsApp. ¡No podemos esperar a celebrar contigo en la fiesta de ${nombre}!`}
+                  ? `Hola ${rsvpData.name}, ya confirmaste tu asistencia para la Halloween Party. ¡Te esperamos! 👻`
+                  : `Tu confirmación se envió por WhatsApp. ¡No podemos esperar a verte en la fiesta! 🎃`}
               </p>
 
               {/* Mostrar datos confirmados */}
               <div
-                className="bg-white/60 backdrop-blur-xl rounded-2xl p-4 mb-6 text-left"
+                className="bg-black/70 backdrop-blur-xl rounded-2xl p-4 mb-6 text-left border-2"
                 style={{
-                  border: `1px solid ${colores.primario[300]}66`,
+                  borderColor: colores.naranja,
                 }}
               >
                 <div className="space-y-2 text-sm">
-                  <div
-                    className="flex items-center gap-2"
-                    style={{ color: colores.primario[800] }}
-                  >
+                  <div className="flex items-center gap-2 text-orange-200">
                     <User className="w-4 h-4" />
                     <span>
-                      <strong>Nombre:</strong> {rsvpData.name}
+                      <strong className="text-orange-400">Nombre:</strong>{" "}
+                      {rsvpData.name}
                     </span>
                   </div>
                   {rsvpData.phone && (
-                    <div
-                      className="flex items-center gap-2"
-                      style={{ color: colores.primario[800] }}
-                    >
+                    <div className="flex items-center gap-2 text-orange-200">
                       <Phone className="w-4 h-4" />
                       <span>
-                        <strong>Teléfono:</strong> {rsvpData.phone}
+                        <strong className="text-orange-400">Teléfono:</strong>{" "}
+                        {rsvpData.phone}
                       </span>
                     </div>
                   )}
                   {rsvpData.dietary_restrictions && (
-                    <div
-                      className="flex items-center gap-2"
-                      style={{ color: colores.primario[800] }}
-                    >
+                    <div className="flex items-center gap-2 text-orange-200">
                       <Utensils className="w-4 h-4" />
                       <span>
-                        <strong>Restricciones:</strong>{" "}
+                        <strong className="text-orange-400">
+                          Restricciones:
+                        </strong>{" "}
                         {rsvpData.dietary_restrictions}
                       </span>
                     </div>
                   )}
                   {rsvpData.message && (
-                    <div
-                      className="flex items-start gap-2"
-                      style={{ color: colores.primario[800] }}
-                    >
-                      <Heart className="w-4 h-4 mt-1" />
+                    <div className="flex items-start gap-2 text-orange-200">
+                      <span className="text-lg">💀</span>
                       <span>
-                        <strong>Mensaje:</strong> {rsvpData.message}
+                        <strong className="text-orange-400">Mensaje:</strong>{" "}
+                        {rsvpData.message}
                       </span>
                     </div>
                   )}
@@ -294,11 +272,9 @@ export default function RSVPSection() {
                     message: "",
                   });
                 }}
-                className="px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105"
+                className="px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 text-black"
                 style={{
-                  background: `linear-gradient(to right, ${colores.primario[200]}cc, ${colores.secundario[300]}cc)`,
-                  color: colores.primario[800],
-                  border: `1px solid ${colores.primario[400]}4d`,
+                  background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                 }}
               >
                 Confirmar otra persona
@@ -323,7 +299,7 @@ export default function RSVPSection() {
           <div
             className="absolute inset-0 lg:w-1/2 lg:right-1/2"
             style={{
-              background: `linear-gradient(135deg, ${colores.primario[50]}, ${colores.secundario[50]}, ${colores.primario[100]})`,
+              background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
             }}
           />
 
@@ -333,26 +309,16 @@ export default function RSVPSection() {
                 <div className="flex items-center justify-center h-full min-h-screen lg:min-h-0 px-8">
                   <div className="text-center rsvp-scale-in">
                     <div className="flex justify-center mb-8">
-                      <div className="rsvp-bounce-icon">
-                        {isExisting ? (
-                          <CheckCircle
-                            className="w-24 h-24"
-                            style={{ color: colores.primario[600] }}
-                          />
-                        ) : (
-                          <Heart
-                            className="w-24 h-24"
-                            style={{ color: colores.primario[600] }}
-                          />
-                        )}
+                      <div className="rsvp-bounce-icon text-9xl">
+                        {isExisting ? "✅" : "🎃"}
                       </div>
                     </div>
 
                     <h2
                       className="font-bold text-5xl md:text-6xl mb-6 leading-tight"
                       style={{
-                        color: colores.primario[800],
-                        textShadow: `0 4px 20px ${colores.primario[600]}4d`,
+                        color: colores.naranja,
+                        textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                       }}
                     >
                       {isExisting
@@ -360,13 +326,10 @@ export default function RSVPSection() {
                         : "¡Confirmación Enviada!"}
                     </h2>
 
-                    <p
-                      className="text-xl max-w-lg mx-auto mb-8 font-medium"
-                      style={{ color: `${colores.primario[900]}cc` }}
-                    >
+                    <p className="text-xl max-w-lg mx-auto mb-8 font-medium text-orange-300">
                       {isExisting
-                        ? `Hola ${rsvpData.name}, ya confirmaste tu asistencia para la fiesta de ${nombre}. ¡Te esperamos!`
-                        : `Tu confirmación se envió por WhatsApp. ¡No podemos esperar a celebrar contigo en la fiesta de ${nombre}!`}
+                        ? `Hola ${rsvpData.name}, ya confirmaste tu asistencia para la Halloween Party. ¡Te esperamos! 👻`
+                        : `Tu confirmación se envió por WhatsApp. ¡No podemos esperar a verte en la fiesta! 🎃`}
                     </p>
 
                     <button
@@ -381,11 +344,9 @@ export default function RSVPSection() {
                           message: "",
                         });
                       }}
-                      className="px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105"
+                      className="px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 text-black text-lg"
                       style={{
-                        background: `linear-gradient(to right, ${colores.primario[200]}cc, ${colores.secundario[300]}cc)`,
-                        color: colores.primario[800],
-                        border: `1px solid ${colores.primario[400]}4d`,
+                        background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                       }}
                     >
                       Confirmar otra persona
@@ -422,54 +383,39 @@ export default function RSVPSection() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${colores.primario[900]}99, ${colores.primario[800]}b3, ${colores.primario[700]}cc)`,
+                    background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
                   }}
                 />
 
                 <div className="relative flex flex-col items-center z-10 text-center max-w-lg mx-auto px-6 rsvp-fade-in-up">
                   <div className="relative inline-flex items-center justify-center mb-8">
-                    <div className="absolute inset-0 rsvp-pulse-glow">
-                      <div
-                        className="w-24 h-24 rounded-full blur-2xl"
-                        style={{
-                          background: `linear-gradient(135deg, ${colores.primario[400]}80, ${colores.terciario[400]}80)`,
-                        }}
-                      />
-                    </div>
+                    <div className="text-8xl mb-4 animate-bounce">👻</div>
                   </div>
 
                   <h2
                     className="font-bold text-2xl md:text-3xl lg:text-4xl mb-4 leading-tight text-white"
                     style={{
-                      textShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                      textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
+                      color: colores.naranja,
                     }}
                   >
-                    Confirmá tu
-                    <br />
-                    Asistencia
+                    Confirmá tu Asistencia
                   </h2>
 
-                  <p
-                    className="text-lg mb-12 font-medium drop-shadow-lg"
-                    style={{ color: `${colores.primario[100]}e6` }}
-                  >
+                  <p className="text-lg mb-12 font-medium drop-shadow-lg text-orange-200">
                     antes del{" "}
-                    <span
-                      className="font-bold"
-                      style={{ color: colores.primario[200] }}
-                    >
+                    <span className="font-bold text-orange-400">
                       {fechaLimiteRSVP.split(",")[0]}
                     </span>
                     <br />
-                    para que podamos preparar la fiesta perfecta de {nombre}
+                    para que podamos preparar la mejor fiesta de Halloween 🎃
                   </p>
 
                   <button
                     onClick={() => setIsFlipped(true)}
-                    className="rsvp-golden-button px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center gap-3 mx-auto"
+                    className="rsvp-golden-button px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center gap-3 mx-auto text-black"
                     style={{
-                      background: `linear-gradient(135deg, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.primario[600]})`,
-                      color: colores.primario[900],
+                      background: `linear-gradient(135deg, ${colores.naranja}, ${colores.dorado})`,
                     }}
                   >
                     <Send className="w-6 h-6" />
@@ -484,28 +430,24 @@ export default function RSVPSection() {
               <div
                 className="h-screen flex items-center justify-center"
                 style={{
-                  background: `linear-gradient(135deg, ${colores.primario[50]}, ${colores.secundario[50]}, ${colores.primario[100]})`,
+                  background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
                 }}
               >
                 <div className="w-full max-w-lg px-6">
                   <div
-                    className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 shadow-2xl rsvp-scale-in"
+                    className="bg-black/80 backdrop-blur-lg rounded-3xl p-6 shadow-2xl rsvp-scale-in border-2"
                     style={{
-                      border: `1px solid ${colores.primario[300]}66`,
+                      borderColor: colores.naranja,
                     }}
                   >
                     <div className="mb-4 flex items-center justify-between">
-                      <h3
-                        className="font-bold text-lg flex items-center gap-2"
-                        style={{ color: colores.primario[800] }}
-                      >
+                      <h3 className="font-bold text-lg flex items-center gap-2 text-orange-400">
                         <Send className="w-5 h-5" />
-                        Confirmar Asistencia
+                        Confirmar Asistencia 🎃
                       </h3>
                       <button
                         onClick={() => setIsFlipped(false)}
-                        className="transition-colors"
-                        style={{ color: colores.primario[600] }}
+                        className="transition-colors text-orange-400 hover:text-orange-300"
                       >
                         <svg
                           className="w-6 h-6"
@@ -524,7 +466,7 @@ export default function RSVPSection() {
                     </div>
 
                     {error && (
-                      <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-700 mb-4">
+                      <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-400 mb-4">
                         <AlertCircle className="w-4 h-4" />
                         <span className="text-sm">{error}</span>
                       </div>
@@ -532,20 +474,11 @@ export default function RSVPSection() {
 
                     <div className="space-y-4">
                       <div>
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2 text-sm"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <User
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                          <User className="w-4 h-4 text-orange-500" />
                           Nombre Completo *
                           {checkingExisting && (
-                            <Loader2
-                              className="w-3 h-3 animate-spin"
-                              style={{ color: colores.primario[600] }}
-                            />
+                            <Loader2 className="w-3 h-3 animate-spin text-orange-500" />
                           )}
                         </label>
                         <input
@@ -555,24 +488,17 @@ export default function RSVPSection() {
                           onChange={handleChange}
                           required
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="Tu nombre completo"
                         />
                       </div>
 
                       <div>
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2 text-sm"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Phone
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                          <Phone className="w-4 h-4 text-orange-500" />
                           Teléfono
                         </label>
                         <input
@@ -581,24 +507,17 @@ export default function RSVPSection() {
                           value={formData.phone}
                           onChange={handleChange}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder={telefono}
                         />
                       </div>
 
                       <div>
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2 text-sm"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Utensils
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                          <Utensils className="w-4 h-4 text-orange-500" />
                           Restricciones Alimentarias
                         </label>
                         <input
@@ -607,25 +526,18 @@ export default function RSVPSection() {
                           value={formData.dietary_restrictions}
                           onChange={handleChange}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="Vegetariano, sin gluten, alergias, etc."
                         />
                       </div>
 
                       <div>
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2 text-sm"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Heart
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
-                          Mensaje para {nombre}
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                          <span className="text-lg">💀</span>
+                          Mensaje
                         </label>
                         <textarea
                           name="message"
@@ -633,22 +545,20 @@ export default function RSVPSection() {
                           onChange={handleChange}
                           rows={2}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
-                          placeholder={`Comparte tus mejores deseos para ${nombre}...`}
+                          placeholder="Comparte tu entusiasmo por la fiesta..."
                         />
                       </div>
 
                       <button
                         onClick={handleSubmit}
                         disabled={loading || !formData.name.trim()}
-                        className="w-full px-4 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-105"
+                        className="w-full px-4 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-105 text-black"
                         style={{
-                          background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                          color: colores.primario[900],
+                          background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                         }}
                       >
                         {loading ? (
@@ -660,26 +570,20 @@ export default function RSVPSection() {
                       </button>
 
                       <div
-                        className="mt-4 p-3 rounded-xl"
+                        className="mt-4 p-3 rounded-xl border-2"
                         style={{
-                          background: `linear-gradient(to right, ${colores.primario[100]}cc, ${colores.secundario[100]}cc)`,
-                          border: `1px solid ${colores.primario[300]}66`,
+                          backgroundColor: `${colores.naranja}20`,
+                          borderColor: `${colores.naranja}80`,
                         }}
                       >
-                        <p
-                          className="text-center text-xs"
-                          style={{ color: `${colores.primario[800]}cc` }}
-                        >
+                        <p className="text-center text-xs text-orange-300">
                           <Calendar className="inline w-3 h-3 mr-1" />
                           <strong>Fecha límite:</strong> {fechaLimiteRSVP}
                           <br />
                           <Phone className="inline w-3 h-3 mr-1 mt-1" />
                           Contacto: {telefono}
                           <br />
-                          <span
-                            className="text-xs mt-1 block"
-                            style={{ color: `${colores.primario[700]}99` }}
-                          >
+                          <span className="text-xs mt-1 block text-orange-400">
                             Tu confirmación se enviará por WhatsApp
                             automáticamente
                           </span>
@@ -712,7 +616,7 @@ export default function RSVPSection() {
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${colores.primario[900]}99, ${colores.primario[800]}b3, ${colores.primario[700]}cc)`,
+              background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
             }}
           />
         </div>
@@ -720,7 +624,7 @@ export default function RSVPSection() {
         <div
           className="absolute inset-0 lg:w-1/2 lg:right-1/2"
           style={{
-            background: `linear-gradient(135deg, ${colores.primario[50]}, ${colores.secundario[50]}, ${colores.primario[100]})`,
+            background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
           }}
         />
 
@@ -731,72 +635,48 @@ export default function RSVPSection() {
                 <div className="w-full max-w-lg">
                   <div className="text-center mb-8 rsvp-fade-in-up">
                     <div className="relative inline-flex items-center justify-center mb-6">
-                      <div className="absolute inset-0 rsvp-pulse-glow">
-                        <div
-                          className="w-20 h-20 rounded-full blur-2xl"
-                          style={{
-                            background: `linear-gradient(135deg, ${colores.primario[400]}80, ${colores.terciario[400]}80)`,
-                          }}
-                        />
-                      </div>
+                      <div className="text-8xl animate-bounce">👻</div>
                     </div>
 
                     <h2
                       className="font-bold text-2xl md:text-3xl lg:text-4xl mb-4 leading-tight"
                       style={{
-                        color: colores.primario[800],
-                        textShadow: `0 4px 20px ${colores.primario[600]}4d`,
+                        color: colores.naranja,
+                        textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                       }}
                     >
-                      Confirmá tu
-                      <br />
-                      Asistencia
+                      Confirmá tu Asistencia
                     </h2>
 
-                    <p
-                      className="text-lg max-w-lg mx-auto mb-6 font-medium"
-                      style={{ color: `${colores.primario[900]}cc` }}
-                    >
+                    <p className="text-lg max-w-lg mx-auto mb-6 font-medium text-orange-300">
                       antes del{" "}
-                      <span
-                        className="font-bold"
-                        style={{ color: colores.primario[700] }}
-                      >
+                      <span className="font-bold text-orange-400">
                         {fechaLimiteRSVP.split(",")[0]}
                       </span>{" "}
-                      para que podamos preparar la fiesta perfecta de {nombre}
+                      para que podamos preparar la mejor fiesta de Halloween 🎃
                     </p>
                   </div>
 
                   <div
-                    className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 shadow-2xl rsvp-scale-in"
+                    className="bg-black/80 backdrop-blur-lg rounded-3xl p-6 shadow-2xl rsvp-scale-in border-2"
                     style={{
-                      border: `1px solid ${colores.primario[300]}66`,
+                      borderColor: colores.naranja,
                     }}
                   >
                     <div>
                       {error && (
-                        <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-700 mb-4">
+                        <div className="p-3 bg-red-500/20 border border-red-400/50 rounded-xl flex items-center gap-2 text-red-400 mb-4">
                           <AlertCircle className="w-4 h-4" />
                           <span className="text-sm">{error}</span>
                         </div>
                       )}
 
                       <div className="mb-4">
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <User
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-orange-300">
+                          <User className="w-4 h-4 text-orange-500" />
                           <span className="text-sm">Nombre Completo *</span>
                           {checkingExisting && (
-                            <Loader2
-                              className="w-3 h-3 animate-spin"
-                              style={{ color: colores.primario[600] }}
-                            />
+                            <Loader2 className="w-3 h-3 animate-spin text-orange-500" />
                           )}
                         </label>
                         <input
@@ -806,24 +686,17 @@ export default function RSVPSection() {
                           onChange={handleChange}
                           required
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="Tu nombre completo"
                         />
                       </div>
 
                       <div className="mb-4">
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Phone
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-orange-300">
+                          <Phone className="w-4 h-4 text-orange-500" />
                           <span className="text-sm">Teléfono</span>
                         </label>
                         <input
@@ -832,24 +705,17 @@ export default function RSVPSection() {
                           value={formData.phone}
                           onChange={handleChange}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder={telefono}
                         />
                       </div>
 
                       <div className="mb-4">
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Utensils
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-orange-300">
+                          <Utensils className="w-4 h-4 text-orange-500" />
                           <span className="text-sm">
                             Restricciones Alimentarias
                           </span>
@@ -860,27 +726,18 @@ export default function RSVPSection() {
                           value={formData.dietary_restrictions}
                           onChange={handleChange}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all backdrop-blur-sm disabled:opacity-50 text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="Vegetariano, sin gluten, alergias, etc."
                         />
                       </div>
 
                       <div className="mb-6">
-                        <label
-                          className="block font-medium mb-2 flex items-center gap-2"
-                          style={{ color: colores.primario[800] }}
-                        >
-                          <Heart
-                            className="w-4 h-4"
-                            style={{ color: colores.primario[600] }}
-                          />
-                          <span className="text-sm">
-                            Mensaje Especial para {nombre}
-                          </span>
+                        <label className="block font-medium mb-2 flex items-center gap-2 text-orange-300">
+                          <span className="text-lg">💀</span>
+                          <span className="text-sm">Mensaje</span>
                         </label>
                         <textarea
                           name="message"
@@ -888,25 +745,23 @@ export default function RSVPSection() {
                           onChange={handleChange}
                           rows={3}
                           disabled={loading}
-                          className="w-full px-3 py-2 bg-white/50 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all resize-none backdrop-blur-sm disabled:opacity-50 text-sm"
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all resize-none backdrop-blur-sm disabled:opacity-50 text-sm text-white border-2"
                           style={{
-                            border: `1px solid ${colores.primario[300]}80`,
-                            color: colores.primario[900],
+                            borderColor: `${colores.naranja}80`,
                           }}
-                          placeholder={`Comparte tus mejores deseos para ${nombre}...`}
+                          placeholder="Comparte tu entusiasmo por la fiesta..."
                         />
                       </div>
 
                       <button
                         onClick={handleSubmit}
                         disabled={loading || !formData.name.trim()}
-                        className="w-full px-6 py-3 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl hover:scale-105"
+                        className="w-full px-6 py-3 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl hover:scale-105 text-black"
                         style={{
-                          background: `linear-gradient(to right, ${colores.primario[400]}, ${colores.primario[500]}, ${colores.terciario[400]})`,
-                          color: colores.primario[900],
+                          background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
                           boxShadow: loading
                             ? ""
-                            : `0 0 30px ${colores.primario[400]}66`,
+                            : `0 0 30px ${colores.naranja}66`,
                         }}
                       >
                         {loading ? (
@@ -923,26 +778,20 @@ export default function RSVPSection() {
                       </button>
 
                       <div
-                        className="mt-4 p-3 rounded-xl"
+                        className="mt-4 p-3 rounded-xl border-2"
                         style={{
-                          background: `linear-gradient(to right, ${colores.primario[100]}cc, ${colores.secundario[100]}cc)`,
-                          border: `1px solid ${colores.primario[300]}66`,
+                          backgroundColor: `${colores.naranja}20`,
+                          borderColor: `${colores.naranja}80`,
                         }}
                       >
-                        <p
-                          className="text-center text-xs"
-                          style={{ color: `${colores.primario[800]}cc` }}
-                        >
+                        <p className="text-center text-xs text-orange-300">
                           <Calendar className="inline w-3 h-3 mr-1" />
                           <strong>Fecha límite:</strong> {fechaLimiteRSVP}
                           <br />
                           <Phone className="inline w-3 h-3 mr-1 mt-1" />
                           Contacto: {telefono}
                           <br />
-                          <span
-                            className="text-xs mt-1 block"
-                            style={{ color: `${colores.primario[700]}99` }}
-                          >
+                          <span className="text-xs mt-1 block text-orange-400">
                             Tu confirmación se enviará por WhatsApp
                             automáticamente
                           </span>
