@@ -10,7 +10,6 @@ import RSVPSection from "@/components/RSVPSection";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { AudioProvider } from "@/components/AudioContext";
-import MasonryGallery from "@/components/MasonryGallery";
 import { LoadingProvider, useLoading } from "@/components/PageLoader";
 import PageLoader from "@/components/PageLoader";
 
@@ -39,7 +38,6 @@ const MainContent = () => {
             <HeroSection />
             <CountdownSection />
             <EventDetails />
-            <MasonryGallery />
             <DressCode />
             <LocationSection />
             <MusicRequests />
