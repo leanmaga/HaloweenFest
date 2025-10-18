@@ -70,7 +70,7 @@ export default function LocationSection() {
       id="location"
       className="py-20 min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 50%, ${colores.negro} 100%)`,
+        background: `${colores.negro}`,
       }}
     >
       <div className="max-w-6xl mx-auto px-4">

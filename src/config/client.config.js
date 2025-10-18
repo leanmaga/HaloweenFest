@@ -1,43 +1,40 @@
 // config/client.config.js
 /**
- * 🎉 CONFIGURACIÓN DEL CLIENTE - CAMBIAR AQUÍ PARA CADA NUEVO PROYECTO
+ * 🎃 CONFIGURACIÓN HALLOWEEN PARTY 2025
  *
  * Este archivo contiene TODA la información personalizable de la invitación.
  * Solo modifica los valores aquí y se aplicarán en toda la aplicación.
  */
 
 export const clientConfig = {
-  // 👤 INFORMACIÓN PERSONAL
+  // 🎃 INFORMACIÓN DEL EVENTO
   quinceañera: {
-    nombre: "Elizabeth",
-    edad: 15,
-    apodo: "", // Opcional, ej: 'Eli'
+    nombre: "Halloween", // Mantener para compatibilidad
+    edad: "Party", // Mantener para compatibilidad
+    apodo: "",
   },
 
   // 📅 INFORMACIÓN DEL EVENTO
   evento: {
-    fecha: "Sábado 01 de Noviembre, 2025",
+    fecha: "Viernes 25 de Octubre, 2025",
     // ⚠️ IMPORTANTE: Formato de fechaCompleta para countdown (YYYY-MM-DD)
-    fechaCompleta: "2025-11-01",
-    hora: "12:00 PM - 20:00 PM",
-    horaInicio: "12:00 PM",
-    horaFin: "20:00 PM",
+    fechaCompleta: "2025-10-25",
+    hora: "22:00 PM - 05:00 AM",
+    horaInicio: "22:00 PM",
+    horaFin: "05:00 AM",
   },
 
   // 📍 UBICACIÓN
   ubicacion: {
-    nombreLugar: "Ángel Vicente Peñaloza 3455",
-    direccion: "Entre Segurola y Av. Eva Perón, B1716 Libertad, Merlo.",
-    ciudad: "Libertdad, Merlo",
+    nombreLugar: "Manuel Soler 1855",
+    direccion: "Entre Gamboa y Terán, Libertad, Merlo.",
+    ciudad: "Libertad, Merlo",
     provincia: "Buenos Aires",
     pais: "Argentina",
-    // URLs de mapas (se generan automáticamente pero puedes personalizarlas)
-    googleMapsUrl: "https://maps.app.goo.gl/GLyir2p9khfF6qLL8", // Déjalo vacío para que se genere automáticamente
+    // URLs de mapas
+    googleMapsUrl: "https://maps.app.goo.gl/GLyir2p9khfF6qLL8", // Actualizar con la dirección correcta
     wazeUrl:
-      "https://ul.waze.com/ul?place=ChIJHzAU50vAvJURDGwKF_UHSCA&ll=-34.70682730%2C-58.71007240&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location", // Déjalo vacío para que se genere automáticamente
-    // O proporciona URLs personalizadas:
-    // googleMapsUrl: 'https://maps.google.com/?q=...',
-    // wazeUrl: 'https://waze.com/ul?q=...',
+      "https://ul.waze.com/ul?place=ChIJHzAU50vAvJURDGwKF_UHSCA&ll=-34.70682730%2C-58.71007240&navigate=yes",
 
     // Imágenes del salón (ubicadas en /public/assets/)
     imagenesSalon: [
@@ -50,7 +47,7 @@ export const clientConfig = {
 
   // 👨‍👩‍👧‍👦 INFORMACIÓN DE CONTACTO
   contacto: {
-    nombreFamilia: "Familia González",
+    nombreFamilia: "Organizadores",
     telefono: "+54 9 11 2271-0612",
     email: "contacto@example.com",
     whatsapp: "+541122710612", // Sin espacios ni guiones
@@ -59,26 +56,26 @@ export const clientConfig = {
   // 📱 REDES SOCIALES
   redes: {
     instagram: {
-      usuario: "elizabeth_15", // Sin @
-      url: "https://instagram.com/elizabeth_15",
+      usuario: "halloween_party", // Sin @
+      url: "https://instagram.com/halloween_party",
     },
-    hashtag: "", // Déjalo vacío para generarlo automáticamente: #Elizabeth15Años
+    hashtag: "#HalloweenParty2025",
   },
 
-  // 🎁 INFORMACIÓN BANCARIA PARA REGALOS
+  // 🎁 INFORMACIÓN BANCARIA PARA REGALOS (Deshabilitado)
   regalos: {
-    mostrarOpcion: true, // true o false
-    alias: "ledesma.599.mp",
-    cbu: "0000003100052227123206",
+    mostrarOpcion: false, // Deshabilitado
+    alias: "",
+    cbu: "",
     nombreCuenta: "",
     mensajePersonalizado: "",
   },
 
   // 📝 CONFIRMACIÓN DE ASISTENCIA (RSVP)
   rsvp: {
-    fechaLimite: "15 de Octubre, 2025",
+    fechaLimite: "Miércoles 22 de Octubre, 2025",
     // Fecha límite en formato ISO para validaciones
-    fechaLimiteISO: "2025-10-30",
+    fechaLimiteISO: "2025-10-22",
     mensajeCierre: "¡Gracias por confirmar tu asistencia!",
     mostrarDietaryRestrictions: true, // Mostrar campo de restricciones alimentarias
   },
@@ -86,67 +83,23 @@ export const clientConfig = {
   // 🎵 MÚSICA
   musica: {
     url: "", // URL de YouTube, Spotify, etc. Déjalo vacío para desactivar
-    titulo: "Canción Especial",
+    titulo: "Playlist Halloween",
     autoplay: false, // true o false
   },
 
-  // 🎨 CÓDIGO DE VESTIMENTA
+  // 🎃 CÓDIGO DE VESTIMENTA - HALLOWEEN
   codigoVestimenta: {
-    tema: "Elegante sport", // 'formal', 'casual', 'cocktail', 'black-tie'
+    tema: "¡Disfraz Obligatorio!",
     descripcion:
-      "Preferentemente, se invita a usar prendas, accesorios, maquillaje o peinados inspirados en la temática Alicia en el País de las Maravillas.",
-    coloresRestringidos: ["Naturales", "Champagne"],
-    mensajeRestriccion:
-      "Por comodidad y para mantener la exclusividad de la quinceañera, se ruega evitar los tonos",
-
-    // Categorías de vestimenta con sugerencias
-    categorias: {
-      damas: {
-        titulo: "Para Damas",
-        sugerencias: [
-          {
-            tipo: "Vestido Largo",
-            descripcion: "Elegante y sofisticado",
-            icono: "Dress",
-          },
-          {
-            tipo: "Vestido Cocktail",
-            descripcion: "Por encima de la rodilla",
-            icono: "Sparkles",
-          },
-          {
-            tipo: "Conjunto Elegante",
-            descripcion: "Blusa y falda o pantalón",
-            icono: "Star",
-          },
-        ],
-      },
-      caballeros: {
-        titulo: "Para Caballeros",
-        sugerencias: [
-          {
-            tipo: "Traje Completo",
-            descripcion: "Con corbata o moño",
-            icono: "User",
-          },
-          {
-            tipo: "Traje sin Corbata",
-            descripcion: "Look smart casual",
-            icono: "Sparkles",
-          },
-          {
-            tipo: "Camisa y Pantalón",
-            descripcion: "Elegante formal",
-            icono: "Star",
-          },
-        ],
-      },
-    },
+      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+    coloresRestringidos: [], // No hay restricciones para Halloween
+    mensajeRestriccion: "",
+    categorias: {}, // Eliminado - se maneja en el componente
   },
 
   // 🔐 CONFIGURACIÓN DE ADMINISTRADOR
   admin: {
-    password: "admin123", // ⚠️ CAMBIAR ESTO en producción
+    password: "halloween2025", // ⚠️ CAMBIAR ESTO en producción
     dashboardUrl: "/admin",
   },
 
@@ -165,11 +118,11 @@ export const clientConfig = {
 
   // 🌐 CONFIGURACIÓN DEL SITIO
   sitio: {
-    nombre: "Invitación de 15 Años",
-    descripcion: "Una celebración mágica",
+    nombre: "Halloween Party 2025",
+    descripcion: "Una noche de terror y diversión",
     url:
       process.env.NEXT_PUBLIC_PRODUCTION_URL ||
-      "https://invitacion-quinceañera.vercel.app",
+      "https://halloween-party-2025.vercel.app",
     idioma: "es",
     imagenOG: "/assets/1.jpg", // Imagen para compartir en redes sociales
   },
@@ -180,9 +133,9 @@ export const clientConfig = {
     ubicacion: true,
     codigoVestimenta: true,
     rsvp: true,
-    regalos: true,
-    fotos: true,
-    musica: false, // Cambiar a true si hay música
+    regalos: false, // Deshabilitado para Halloween
+    fotos: false, // Deshabilitado (eliminaste la galería)
+    musica: true, // Habilitado
   },
 };
 
@@ -192,8 +145,7 @@ export const clientConfig = {
 
 // Generar hashtag automáticamente
 export const getHashtag = () => {
-  const { nombre, edad } = clientConfig.quinceañera;
-  return clientConfig.redes.hashtag || `#${nombre}${edad}Años`;
+  return clientConfig.redes.hashtag || "#HalloweenParty2025";
 };
 
 // Generar URLs de mapas automáticamente
@@ -216,15 +168,13 @@ export const getMapUrls = () => {
 
 // Obtener título completo del sitio
 export const getSiteTitle = () => {
-  const { nombre, edad } = clientConfig.quinceañera;
-  return `${nombre} - Mis ${edad} Años`;
+  return "Halloween Party 2025";
 };
 
 // Obtener descripción del sitio
 export const getSiteDescription = () => {
-  const { nombre, edad } = clientConfig.quinceañera;
   const { fecha } = clientConfig.evento;
-  return `Te invito a celebrar mis ${edad} años el ${fecha}. ¡No te lo pierdas!`;
+  return `Te invitamos a la Halloween Party más espeluznante el ${fecha}. ¡No te lo pierdas!`;
 };
 
 export default clientConfig;

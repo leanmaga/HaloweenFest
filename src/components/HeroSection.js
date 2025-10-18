@@ -137,28 +137,15 @@ export default function HeroSection() {
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Fondo base con gradiente Halloween */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle at 20% 20%, ${colores.naranja}40 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, ${colores.morado}40 0%, transparent 50%),
-            radial-gradient(circle at 40% 60%, ${colores.negro}25 0%, transparent 50%),
-            linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 25%, ${colores.negro} 100%)
-          `,
-        }}
-      />
-
       {/* Tapiz con opacidad para que se vea sobre el fondo */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url('/assets/tapiz1.png')`,
+          backgroundImage: `url('/assets/backdesktop.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.15,
+
           mixBlendMode: "multiply",
         }}
       />

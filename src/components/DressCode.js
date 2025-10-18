@@ -45,7 +45,7 @@ export default function DressCodeSection() {
     <section
       className="relative min-h-screen py-20 overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 50%, ${colores.negro} 100%)`,
+        background: `${colores.negro}`,
       }}
     >
       {/* Partículas flotantes de fondo */}
@@ -306,57 +306,6 @@ export default function DressCodeSection() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mensaje Final Inspirador */}
-        <div
-          className="text-center mt-16 dresscode-slide-up"
-          style={{ animationDelay: "1s" }}
-        >
-          <div
-            className="glass-morphism rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl border-2"
-            style={{
-              borderColor: colores.dorado,
-              backgroundColor: "rgba(0, 0, 0, 0.7)",
-            }}
-          >
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <span className="text-3xl">🎃</span>
-              <span className="text-4xl">👻</span>
-              <span className="text-3xl">🎃</span>
-            </div>
-
-            <h3
-              className="text-2xl md:text-3xl font-bold mb-4"
-              style={{ color: colores.naranja }}
-            >
-              ¡Una Noche Inolvidable Te Espera!
-            </h3>
-
-            <p className="text-lg leading-relaxed text-orange-200">
-              Recuerda que lo más importante es que te diviertas y disfrutes al
-              máximo de esta celebración única. Tu presencia es el mejor regalo
-              y tu creatividad con el disfraz hará que la noche sea aún más
-              especial.
-              <span className="font-bold text-orange-400">
-                {" "}
-                ¡Nos vemos en la pista de baile! 🕺💃
-              </span>
-            </p>
-
-            <div className="flex items-center justify-center gap-4 mt-6">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-4 h-4 text-orange-500"
-                  style={{
-                    animation: `pulse 2s ease-in-out infinite`,
-                    animationDelay: `${i * 0.2}s`,
-                  }}
-                />
-              ))}
             </div>
           </div>
         </div>

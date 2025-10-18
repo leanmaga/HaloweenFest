@@ -138,7 +138,7 @@ export default function MusicRequests() {
               <div
                 className="relative h-screen w-full flex items-center justify-center"
                 style={{
-                  backgroundImage: `url('/assets/8.jpg')`,
+                  backgroundImage: `url('/assets/hombrelobo.png')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -147,7 +147,7 @@ export default function MusicRequests() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
+                    background: `${colores.negro}`,
                   }}
                 />
 
@@ -157,7 +157,7 @@ export default function MusicRequests() {
                       <div
                         className="w-24 h-24 rounded-full blur-2xl animate-pulse"
                         style={{
-                          background: `linear-gradient(135deg, ${colores.naranja}80, ${colores.dorado}80)`,
+                          background: `${colores.negro}`,
                         }}
                       />
                     </div>
@@ -206,7 +206,7 @@ export default function MusicRequests() {
               <div
                 className="h-screen flex items-center justify-center overflow-y-auto"
                 style={{
-                  background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
+                  background: `${colores.negro}`,
                 }}
               >
                 <div className="w-full max-w-lg px-6 py-8">
@@ -457,7 +457,7 @@ export default function MusicRequests() {
           <div
             className="w-full h-full"
             style={{
-              backgroundImage: `url('/assets/8.jpg')`,
+              backgroundImage: `url('/assets/hombrelobo.png')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -466,7 +466,7 @@ export default function MusicRequests() {
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
+              background: ` ${colores.negro}`,
             }}
           />
         </div>
@@ -475,7 +475,7 @@ export default function MusicRequests() {
         <div
           className="absolute inset-y-0 right-0 w-1/2"
           style={{
-            background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
+            background: `${colores.negro}`,
           }}
         />
 

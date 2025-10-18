@@ -177,7 +177,7 @@ export default function RSVPSection() {
           <div
             className="relative h-screen w-full flex items-center justify-center"
             style={{
-              backgroundImage: `url('/assets/1.jpg')`,
+              backgroundImage: `url('/assets/hombrelobo.png')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -186,7 +186,7 @@ export default function RSVPSection() {
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
+                background: `${colores.negro}`,
               }}
             />
 
@@ -289,7 +289,7 @@ export default function RSVPSection() {
             <div
               className="w-full h-full"
               style={{
-                backgroundImage: `url('/assets/1.jpg')`,
+                backgroundImage: `url('/assets/hombrelobo.png')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -299,7 +299,7 @@ export default function RSVPSection() {
           <div
             className="absolute inset-0 lg:w-1/2 lg:right-1/2"
             style={{
-              background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
+              background: `${colores.negro}`,
             }}
           />
 
@@ -374,7 +374,7 @@ export default function RSVPSection() {
               <div
                 className="relative h-screen w-full flex items-center justify-center"
                 style={{
-                  backgroundImage: `url('/assets/1.jpg')`,
+                  backgroundImage: `url('/assets/hombrelobo.png')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -383,7 +383,7 @@ export default function RSVPSection() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
+                    background: `${colores.negro}`,
                   }}
                 />
 
@@ -430,7 +430,7 @@ export default function RSVPSection() {
               <div
                 className="h-screen flex items-center justify-center"
                 style={{
-                  background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
+                  background: `${colores.negro}`,
                 }}
               >
                 <div className="w-full max-w-lg px-6">
@@ -474,7 +474,7 @@ export default function RSVPSection() {
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <User className="w-4 h-4 text-orange-500" />
                           Nombre Completo *
                           {checkingExisting && (
@@ -497,7 +497,7 @@ export default function RSVPSection() {
                       </div>
 
                       <div>
-                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <Phone className="w-4 h-4 text-orange-500" />
                           Teléfono
                         </label>
@@ -516,7 +516,7 @@ export default function RSVPSection() {
                       </div>
 
                       <div>
-                        <label className="block font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <Utensils className="w-4 h-4 text-orange-500" />
                           Restricciones Alimentarias
                         </label>
@@ -572,7 +572,7 @@ export default function RSVPSection() {
                       <div
                         className="mt-4 p-3 rounded-xl border-2"
                         style={{
-                          backgroundColor: `${colores.naranja}20`,
+                          backgroundColor: `${colores.negro}20`,
                           borderColor: `${colores.naranja}80`,
                         }}
                       >
@@ -607,7 +607,7 @@ export default function RSVPSection() {
           <div
             className="w-full h-full"
             style={{
-              backgroundImage: `url('/assets/1.jpg')`,
+              backgroundImage: `url('/assets/hombrelobo.jpg')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -616,7 +616,7 @@ export default function RSVPSection() {
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${colores.naranja}dd, ${colores.morado}ee, ${colores.negro}f0)`,
+              background: ` ${colores.negro}`,
             }}
           />
         </div>
@@ -624,7 +624,7 @@ export default function RSVPSection() {
         <div
           className="absolute inset-0 lg:w-1/2 lg:right-1/2"
           style={{
-            background: `linear-gradient(135deg, ${colores.naranja}20, ${colores.morado}30, ${colores.negro})`,
+            background: ` ${colores.negro}`,
           }}
         />
 

@@ -82,7 +82,7 @@ export default function CountdownSection() {
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4"
       style={{
-        background: `linear-gradient(135deg, ${colores.naranja}20 0%, ${colores.morado}30 50%, ${colores.negro} 100%)`,
+        background: `${colores.negro}`,
       }}
     >
       {/* Partículas animadas con emojis */}
@@ -272,24 +272,6 @@ export default function CountdownSection() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Mensaje motivacional */}
-        <div
-          className="glass-card rounded-2xl p-6 max-w-2xl mx-auto"
-          style={{ borderColor: colores.morado }}
-        >
-          <p className="text-lg md:text-xl italic text-orange-200 mb-4">
-            Cada segundo que pasa nos acerca más a la fiesta más espeluznante
-            del año
-          </p>
-          <div className="flex justify-center gap-3 text-3xl">
-            <span className="animate-bounce">🎃</span>
-            <span className="animate-pulse">👻</span>
-            <span className="animate-bounce" style={{ animationDelay: "0.2s" }}>
-              🦇
-            </span>
-          </div>
         </div>
 
         {/* Nota adicional */}
