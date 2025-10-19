@@ -24,9 +24,9 @@ export const clientConfig = {
     provincia: "Buenos Aires",
     pais: "Argentina",
     // URLs de mapas
-    googleMapsUrl: "https://maps.app.goo.gl/GLyir2p9khfF6qLL8", // Actualizar con la dirección correcta
+    googleMapsUrl: "https://maps.app.goo.gl/3Np1QuGHKqF3Ax7YA", // Actualizar con la dirección correcta
     wazeUrl:
-      "https://ul.waze.com/ul?place=ChIJHzAU50vAvJURDGwKF_UHSCA&ll=-34.70682730%2C-58.71007240&navigate=yes",
+      "https://www.waze.com/en/live-map/directions/ar/provincia-de-buenos-aires/libertad/myl?place=ChIJkwt9X9zAvJURYJT-iJr4Ryg",
   },
 
   // 👨‍👩‍👧‍👦 INFORMACIÓN DE CONTACTO
