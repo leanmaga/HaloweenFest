@@ -554,7 +554,7 @@ export default function RSVPSection() {
                           style={{
                             borderColor: `${colores.naranja}80`,
                           }}
-                          placeholder="+54 11 1234-5678"
+                          placeholder="+54 11 3566-0145"
                         />
                       </div>
 
@@ -753,7 +753,7 @@ export default function RSVPSection() {
                           style={{
                             borderColor: `${colores.naranja}80`,
                           }}
-                          placeholder="+54 11 1234-5678"
+                          placeholder="+54 11 3566-0145"
                         />
                       </div>
 

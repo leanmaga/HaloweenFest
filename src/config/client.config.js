@@ -32,9 +32,9 @@ export const clientConfig = {
   // 👨‍👩‍👧‍👦 INFORMACIÓN DE CONTACTO
   contacto: {
     nombreFamilia: "Organizadores",
-    telefono: "+54 9 11 2271-0612",
+    telefono: "+54 9 11 3566-0145",
     email: "contacto@example.com",
-    whatsapp: "+541122710612", // Sin espacios ni guiones
+    whatsapp: "+541135660145", // Sin espacios ni guiones
   },
 
   // 📱 REDES SOCIALES
