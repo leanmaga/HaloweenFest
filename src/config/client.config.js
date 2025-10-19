@@ -11,8 +11,8 @@ export const clientConfig = {
     fecha: "Sábado 25 de Octubre, 2025",
     // ⚠️ IMPORTANTE: Formato de fechaCompleta para countdown (YYYY-MM-DD)
     fechaCompleta: "2025-10-25",
-    hora: "22:00 PM - 05:00 AM",
-    horaInicio: "22:00 PM",
+    hora: "23:59 PM - 05:00 AM",
+    horaInicio: "23:59 PM",
     horaFin: "05:00 AM",
   },
 

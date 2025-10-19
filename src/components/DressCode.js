@@ -198,7 +198,8 @@ export default function DressCodeSection() {
                   className="text-center text-lg font-semibold"
                   style={{ color: colores.dorado }}
                 >
-                  🏆 ¡Habrá premio al mejor disfraz de la noche! 🏆
+                  🏆 ¡Premios: Champagne + Vino para los mejores disfraces de la
+                  noche! 🏆
                 </p>
               </div>
             </div>
