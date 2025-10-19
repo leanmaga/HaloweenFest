@@ -94,7 +94,7 @@ const PageLoader = () => {
       }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, ${colores.naranja}30 0%, ${colores.morado}50 50%, ${colores.negro} 100%)`,
+        background: `${colores.negro} `,
       }}
     >
       {/* Partículas flotantes de Halloween */}

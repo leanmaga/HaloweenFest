@@ -1,11 +1,3 @@
-// config/client.config.js
-/**
- * 🎃 CONFIGURACIÓN HALLOWEEN PARTY 2025
- *
- * Este archivo contiene TODA la información personalizable de la invitación.
- * Solo modifica los valores aquí y se aplicarán en toda la aplicación.
- */
-
 export const clientConfig = {
   // 🎃 INFORMACIÓN DEL EVENTO
   quinceañera: {
@@ -16,7 +8,7 @@ export const clientConfig = {
 
   // 📅 INFORMACIÓN DEL EVENTO
   evento: {
-    fecha: "Viernes 25 de Octubre, 2025",
+    fecha: "Sábado 25 de Octubre, 2025",
     // ⚠️ IMPORTANTE: Formato de fechaCompleta para countdown (YYYY-MM-DD)
     fechaCompleta: "2025-10-25",
     hora: "22:00 PM - 05:00 AM",
@@ -35,14 +27,6 @@ export const clientConfig = {
     googleMapsUrl: "https://maps.app.goo.gl/GLyir2p9khfF6qLL8", // Actualizar con la dirección correcta
     wazeUrl:
       "https://ul.waze.com/ul?place=ChIJHzAU50vAvJURDGwKF_UHSCA&ll=-34.70682730%2C-58.71007240&navigate=yes",
-
-    // Imágenes del salón (ubicadas en /public/assets/)
-    imagenesSalon: [
-      "/assets/salon1.png",
-      "/assets/salon2.png",
-      "/assets/salon3.png",
-      "/assets/salon4.png",
-    ],
   },
 
   // 👨‍👩‍👧‍👦 INFORMACIÓN DE CONTACTO
@@ -124,7 +108,7 @@ export const clientConfig = {
       process.env.NEXT_PUBLIC_PRODUCTION_URL ||
       "https://halloween-party-2025.vercel.app",
     idioma: "es",
-    imagenOG: "/assets/1.jpg", // Imagen para compartir en redes sociales
+    imagenOG: "/assets/back.png", // Imagen para compartir en redes sociales
   },
 
   // 🎭 SECCIONES VISIBLES

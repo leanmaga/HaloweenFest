@@ -1,14 +1,5 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import {
-  Music,
-  Send,
-  Headphones,
-  Loader2,
-  AlertCircle,
-  Sparkles,
-} from "lucide-react";
+import { Music, Send, Headphones, Loader2, AlertCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
@@ -26,10 +17,12 @@ export default function MusicRequests() {
 
   const { colores } = useHalloweenConfig();
 
+  // Cargar canciones al montar el componente
   useEffect(() => {
     loadSongs();
   }, []);
 
+  // Función para cargar canciones desde Supabase
   const loadSongs = async () => {
     try {
       setLoadingSongs(true);
@@ -53,6 +46,7 @@ export default function MusicRequests() {
     }
   };
 
+  // Función para enviar canción a Supabase
   const handleSubmit = async () => {
     if (!songRequest.trim()) return;
 
@@ -94,15 +88,15 @@ export default function MusicRequests() {
     } catch (error) {
       console.error("Error submitting song:", error);
       let errorMessage =
-        "Hubo un error al enviar tu solicitud. Por favor intenta de nuevo.";
+        "Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.";
 
-      if (error.message.includes("policy")) {
-        errorMessage = "Error de permisos en la base de datos";
-      } else if (error.message.includes("network")) {
-        errorMessage = "Error de conexión a internet";
+      if (error.code === "PGRST116") {
+        errorMessage =
+          "No se pudo conectar con la base de datos. Verifica tu configuración de Supabase.";
       }
 
       setError(errorMessage);
+      setTimeout(() => setError(""), 5000);
     } finally {
       setLoading(false);
     }
@@ -114,21 +108,96 @@ export default function MusicRequests() {
     return `${count} canciones`;
   };
 
-  const handleShowForm = () => {
-    setShowForm(true);
-  };
-
-  const handleCloseForm = () => {
-    setShowForm(false);
-  };
-
-  const handleFlipBack = () => {
-    setIsFlipped(false);
-    setShowForm(false);
-  };
-
   return (
-    <div className="relative">
+    <div className="relative" id="music">
+      <style>{`
+        .music-flip-card {
+          perspective: 1000px;
+          height: 100vh;
+        }
+
+        .music-flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.8s;
+          transform-style: preserve-3d;
+        }
+
+        .music-flip-card.flipped .music-flip-card-inner {
+          transform: rotateY(180deg);
+        }
+
+        .music-flip-card-front,
+        .music-flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+
+        .music-flip-card-back {
+          transform: rotateY(180deg);
+        }
+
+        .music-golden-button {
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+          }
+          50% {
+            box-shadow: 0 8px 48px rgba(255, 107, 53, 0.6);
+          }
+        }
+
+        .music-rotate-sparkles {
+          animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .music-fade-in-up {
+          animation: fadeInUp 0.5s ease-out forwards;
+          opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .music-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .music-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 107, 53, 0.1);
+          border-radius: 10px;
+        }
+
+        .music-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 107, 53, 0.5);
+          border-radius: 10px;
+        }
+
+        .music-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 107, 53, 0.7);
+        }
+      `}</style>
+
       {/* LAYOUT MÓVIL */}
       <div className="lg:hidden">
         <div className={`music-flip-card ${isFlipped ? "flipped" : ""}`}>
@@ -138,7 +207,7 @@ export default function MusicRequests() {
               <div
                 className="relative h-screen w-full flex items-center justify-center"
                 style={{
-                  backgroundImage: `url('/assets/hombrelobo.png')`,
+                  backgroundImage: `url('https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=800&q=80')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -147,7 +216,7 @@ export default function MusicRequests() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `${colores.negro}`,
+                    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%)`,
                   }}
                 />
 
@@ -157,7 +226,7 @@ export default function MusicRequests() {
                       <div
                         className="w-24 h-24 rounded-full blur-2xl animate-pulse"
                         style={{
-                          background: `${colores.negro}`,
+                          background: colores.naranja,
                         }}
                       />
                     </div>
@@ -180,18 +249,11 @@ export default function MusicRequests() {
                     </span>
                   </h2>
 
-                  <p className="text-lg mb-12 font-medium drop-shadow-lg text-white/90">
-                    Ayúdanos a crear la banda sonora perfecta
-                    <br />
-                    ¡Tu canción podría hacer bailar a todos en la pista! 🕺💃
-                  </p>
-
                   <button
                     onClick={() => setIsFlipped(true)}
                     className="music-golden-button px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center gap-3 mx-auto text-black"
                     style={{
                       background: `linear-gradient(135deg, ${colores.naranja}, ${colores.dorado})`,
-                      boxShadow: `0 8px 32px ${colores.naranja}4d`,
                     }}
                   >
                     <Music className="w-6 h-6" />
@@ -206,7 +268,7 @@ export default function MusicRequests() {
               <div
                 className="h-screen flex items-center justify-center overflow-y-auto"
                 style={{
-                  background: `${colores.negro}`,
+                  background: colores.negro,
                 }}
               >
                 <div className="w-full max-w-lg px-6 py-8">
@@ -218,7 +280,10 @@ export default function MusicRequests() {
                           Playlist de la Fiesta 🎃
                         </h3>
                         <button
-                          onClick={handleFlipBack}
+                          onClick={() => {
+                            setIsFlipped(false);
+                            setShowForm(false);
+                          }}
                           className="transition-colors text-orange-400 hover:text-orange-300"
                         >
                           <svg
@@ -239,7 +304,7 @@ export default function MusicRequests() {
 
                       <div className="text-center">
                         <button
-                          onClick={handleShowForm}
+                          onClick={() => setShowForm(true)}
                           className="inline-flex items-center gap-3 rounded-full px-6 py-3 font-bold text-lg shadow-2xl hover:scale-105 transition-transform text-black"
                           style={{
                             background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
@@ -268,8 +333,11 @@ export default function MusicRequests() {
                       </div>
 
                       {loadingSongs ? (
-                        <div className="flex items-center justify-center py-8">
-                          <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
+                        <div className="text-center py-8">
+                          <Loader2 className="w-8 h-8 animate-spin mx-auto text-orange-500" />
+                          <p className="text-orange-400 mt-2">
+                            Cargando canciones...
+                          </p>
                         </div>
                       ) : dbSongs.length > 0 ? (
                         <div
@@ -331,7 +399,7 @@ export default function MusicRequests() {
                       }}
                     >
                       <button
-                        onClick={handleCloseForm}
+                        onClick={() => setShowForm(false)}
                         className="absolute top-4 right-4 w-8 h-8 bg-orange-900/40 hover:bg-orange-800/60 rounded-full flex items-center justify-center transition-all text-sm hover:rotate-90 text-orange-300"
                       >
                         ✕
@@ -364,7 +432,6 @@ export default function MusicRequests() {
                               className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
                               style={{
                                 borderColor: `${colores.naranja}80`,
-                                focusRing: colores.naranja,
                               }}
                               placeholder="Ej: Thriller - Michael Jackson"
                               disabled={loading}
@@ -457,7 +524,7 @@ export default function MusicRequests() {
           <div
             className="w-full h-full"
             style={{
-              backgroundImage: `url('/assets/hombrelobo.png')`,
+              backgroundImage: `url('https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=1200&q=80')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -466,7 +533,7 @@ export default function MusicRequests() {
           <div
             className="absolute inset-0"
             style={{
-              background: ` ${colores.negro}`,
+              background: `linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%)`,
             }}
           />
         </div>
@@ -475,7 +542,7 @@ export default function MusicRequests() {
         <div
           className="absolute inset-y-0 right-0 w-1/2"
           style={{
-            background: `${colores.negro}`,
+            background: colores.negro,
           }}
         />
 
@@ -513,12 +580,6 @@ export default function MusicRequests() {
                       ¡Pide tu Canción! 🎵
                     </span>
                   </h2>
-
-                  <p className="text-xl text-white/90 max-w-lg mx-auto lg:mx-0 mb-8 font-medium drop-shadow-lg">
-                    Ayúdanos a crear la banda sonora perfecta
-                    <br />
-                    ¡Tu canción podría hacer bailar a todos en la pista! 🕺💃
-                  </p>
                 </div>
               </div>
 
@@ -529,7 +590,7 @@ export default function MusicRequests() {
                     <div className="space-y-8">
                       <div className="text-center">
                         <button
-                          onClick={handleShowForm}
+                          onClick={() => setShowForm(true)}
                           className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-bold text-xl shadow-2xl hover:scale-105 transition-transform text-black"
                           style={{
                             background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
@@ -570,8 +631,11 @@ export default function MusicRequests() {
                         </h3>
 
                         {loadingSongs ? (
-                          <div className="flex items-center justify-center py-8">
-                            <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
+                          <div className="text-center py-8">
+                            <Loader2 className="w-8 h-8 animate-spin mx-auto text-orange-500" />
+                            <p className="text-orange-400 mt-2">
+                              Cargando canciones...
+                            </p>
                           </div>
                         ) : dbSongs.length > 0 ? (
                           <div
@@ -606,16 +670,6 @@ export default function MusicRequests() {
                                         {song.message}
                                       </div>
                                     )}
-                                    <p className="text-xs mt-1 text-orange-500">
-                                      {new Date(
-                                        song.created_at
-                                      ).toLocaleDateString("es-ES", {
-                                        day: "numeric",
-                                        month: "short",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                      })}
-                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -640,7 +694,7 @@ export default function MusicRequests() {
                       }}
                     >
                       <button
-                        onClick={handleCloseForm}
+                        onClick={() => setShowForm(false)}
                         className="absolute top-4 right-4 w-10 h-10 bg-orange-900/40 hover:bg-orange-800/60 rounded-full flex items-center justify-center transition-all text-xl hover:rotate-90 text-orange-300"
                       >
                         ✕

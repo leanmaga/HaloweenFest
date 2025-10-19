@@ -1,13 +1,7 @@
 // hooks/useHalloweenConfig.js
 "use client";
 
-import {
-  clientConfig,
-  getHashtag,
-  getMapUrls,
-  getSiteTitle,
-  getSiteDescription,
-} from "@/config/client.config";
+import { clientConfig, getMapUrls } from "@/config/client.config";
 import { themeConfig } from "@/config/theme.config";
 
 /**
@@ -110,7 +104,7 @@ export function useHalloweenConfig() {
   const colores = {
     naranja: "#FF6B35",
     morado: "#6B2D5C",
-    negro: "#1a1a1a",
+    negro: "#000000",
     verde: "#4CAF50",
     dorado: "#FFB800",
     // Mantener compatibilidad con estructura anterior
@@ -255,7 +249,7 @@ export function useHalloweenColors() {
   return {
     naranja: "#FF6B35",
     morado: "#6B2D5C",
-    negro: "#1a1a1a",
+    negro: "#000000",
     verde: "#4CAF50",
     dorado: "#FFB800",
   };

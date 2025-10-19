@@ -32,7 +32,7 @@ const coockie = Cookie({
 });
 
 // ✅ Obtener configuración desde client.config.js
-const { nombre, edad } = clientConfig.quinceañera;
+const { nombre } = clientConfig.quinceañera;
 const { url: siteUrl, idioma, imagenOG } = clientConfig.sitio;
 
 // URLs según el entorno
@@ -54,13 +54,13 @@ export const metadata = {
     title: getSiteTitle(),
     description: getSiteDescription(),
     url: baseUrl,
-    siteName: `15 Años de ${nombre}`,
+    siteName: nombre,
     images: [
       {
         url: imagenOG || "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `Invitación - ${nombre} 15 Años`,
+        alt: `Invitación - ${nombre}`,
       },
     ],
     locale: idioma === "es" ? "es_ES" : "en_US",
@@ -116,14 +116,11 @@ export const metadata = {
   // Otros meta tags
   authors: [{ name: nombre }],
   keywords: [
-    "15 años",
     nombre.toLowerCase(),
-    "quinceañera",
     "celebración",
     "fiesta",
     "invitación",
-    "mis 15",
-    `${nombre.toLowerCase()} 15`,
+    "evento",
   ],
   category: "event",
 };
@@ -160,10 +157,7 @@ export default function RootLayout({ children }) {
         {/* Meta tags para dispositivos móviles */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-status-bar-style" content="default" />
-        <meta
-          name="apple-mobile-web-app-title"
-          content={`${nombre} - 15 Años`}
-        />
+        <meta name="apple-mobile-web-app-title" content={nombre} />
 
         {/* Meta tag para formato de número de teléfono */}
         <meta name="format-detection" content="telephone=no" />

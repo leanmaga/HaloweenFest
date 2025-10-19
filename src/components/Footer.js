@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Phone, MessageCircle, Instagram, Sparkles } from "lucide-react";
+import { MessageCircle, Sparkles } from "lucide-react";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function Footer() {
@@ -16,8 +16,6 @@ export default function Footer() {
     horaEvento,
     lugar,
     direccion,
-    instagramUser,
-    nombreFamilia,
     colores,
   } = useHalloweenConfig();
 
@@ -190,22 +188,6 @@ export default function Footer() {
               <span className="font-semibold">WhatsApp</span>
             </a>
           )}
-
-          {instagramUser && (
-            <a
-              href={`https://instagram.com/${instagramUser}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
-              style={{
-                background: `linear-gradient(135deg, ${colores.morado}, ${colores.naranja})`,
-                color: "white",
-              }}
-            >
-              <Instagram className="w-5 h-5" />
-              <span className="font-semibold">@{instagramUser}</span>
-            </a>
-          )}
         </div>
 
         {/* Separador Decorativo */}
@@ -253,10 +235,8 @@ export default function Footer() {
           style={{ animationDelay: "0.8s" }}
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 text-gray-500 text-sm">
-            <span>Hecho con</span>
-            <span className="text-xl animate-pulse">🎃</span>
+            <span>Desarrollado por</span>
             <span>
-              para la Halloween Party por{" "}
               <a
                 href="https://patagoniascript.vercel.app/"
                 target="_blank"

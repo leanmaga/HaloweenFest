@@ -26,23 +26,9 @@ export default function DressCodeSection() {
     setParticles(newParticles);
   }, []);
 
-  const halloweenStyles = {
-    caballeros: [
-      {
-        title: "Disfraces",
-        image: "/assets/manTraje.jpeg",
-      },
-    ],
-    damas: [
-      {
-        title: "Disfraces",
-        image: "/assets/womanTraje.jpeg",
-      },
-    ],
-  };
-
   return (
     <section
+      id="dresscode"
       className="relative min-h-screen py-20 overflow-hidden"
       style={{
         background: `${colores.negro}`,
@@ -220,93 +206,7 @@ export default function DressCodeSection() {
 
           {/* Grid de Cards para Inspiración Visual */}
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {/* Card Caballeros */}
-              <div
-                className="glass-morphism rounded-2xl overflow-hidden shadow-2xl dresscode-card-hover h-full dresscode-slide-left border-2"
-                style={{
-                  borderColor: colores.morado,
-                  backgroundColor: "rgba(0, 0, 0, 0.6)",
-                }}
-                onMouseEnter={() => setHoveredCard("caballeros")}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <Image
-                    width={600}
-                    height={800}
-                    src={halloweenStyles.caballeros[0].image}
-                    alt={halloweenStyles.caballeros[0].title}
-                    className="w-full h-full object-cover"
-                    style={{
-                      filter:
-                        hoveredCard === "caballeros"
-                          ? "brightness(0.7) contrast(1.2)"
-                          : "brightness(0.5)",
-                      transition: "all 0.3s ease",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, ${colores.morado}dd, transparent)`,
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <div className="text-4xl mb-2">🧛‍♂️</div>
-                    <h4 className="text-2xl font-bold text-white mb-2">
-                      Para Caballeros
-                    </h4>
-                    <p className="text-white/80">
-                      Disfraces épicos y terroríficos
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Damas */}
-              <div
-                className="glass-morphism rounded-2xl overflow-hidden shadow-2xl dresscode-card-hover h-full dresscode-slide-right border-2"
-                style={{
-                  borderColor: colores.naranja,
-                  backgroundColor: "rgba(0, 0, 0, 0.6)",
-                }}
-                onMouseEnter={() => setHoveredCard("damas")}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <Image
-                    width={600}
-                    height={800}
-                    src={halloweenStyles.damas[0].image}
-                    alt={halloweenStyles.damas[0].title}
-                    className="w-full h-full object-cover"
-                    style={{
-                      filter:
-                        hoveredCard === "damas"
-                          ? "brightness(0.7) contrast(1.2)"
-                          : "brightness(0.5)",
-                      transition: "all 0.3s ease",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, ${colores.naranja}dd, transparent)`,
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <div className="text-4xl mb-2">🧙‍♀️</div>
-                    <h4 className="text-2xl font-bold text-white mb-2">
-                      Para Damas
-                    </h4>
-                    <p className="text-white/80">
-                      Disfraces elegantes y espeluznantes
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto"></div>
           </div>
         </div>
       </div>

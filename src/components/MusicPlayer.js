@@ -16,11 +16,27 @@ const MusicPlayer = ({ className = "", showVolumeControl = true }) => {
     toggleMute,
   } = useAudio();
 
+  // Colores de Halloween
+  const colors = {
+    orange: "#FF8C42",
+    orangeLight: "#FFA500",
+    orangeDark: "#FF7720",
+    purple: "#A855F7",
+    purpleLight: "#C084FC",
+    purpleDark: "#9333EA",
+    black: "#000000",
+    blackLight: "#1a1a1a",
+  };
+
   // Si hay error, mostrar mensaje de error
   if (error) {
     return (
       <div
-        className={`inline-flex items-center px-2 py-1 bg-red-100 text-red-800 rounded text-xs ${className}`}
+        className={`inline-flex items-center px-2 py-1 rounded text-xs ${className}`}
+        style={{
+          backgroundColor: `${colors.orange}20`,
+          color: colors.orange,
+        }}
       >
         <Music size={14} className="mr-1" />
         <span className="text-xs">Audio Error</span>
@@ -41,9 +57,9 @@ const MusicPlayer = ({ className = "", showVolumeControl = true }) => {
             ? {
                 scale: [1, 1.08, 1],
                 boxShadow: [
-                  "0 4px 20px rgba(212, 152, 157, 0.5)",
-                  "0 6px 30px rgba(212, 152, 157, 0.8)",
-                  "0 4px 20px rgba(212, 152, 157, 0.5)",
+                  `0 4px 20px ${colors.orange}80`,
+                  `0 6px 30px ${colors.orange}cc`,
+                  `0 4px 20px ${colors.orange}80`,
                 ],
               }
             : {}
@@ -57,19 +73,44 @@ const MusicPlayer = ({ className = "", showVolumeControl = true }) => {
               }
             : {}
         }
-        className={`flex items-center gap-1 px-3 py-1.5 text-sm font-bold rounded-full transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden ${
-          isPlaying
-            ? "bg-gradient-to-r from-[#d4989d] via-[#e8b4b8] to-[#d4989d] bg-[length:200%_100%] shadow-lg shadow-quince text-[#543032]"
+        className={`flex items-center gap-1 px-3 py-1.5 text-sm font-bold rounded-full transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden`}
+        style={{
+          backgroundImage: isPlaying
+            ? `linear-gradient(90deg, ${colors.orange}, ${colors.orangeLight}, ${colors.orange})`
             : isLoading
-            ? "bg-[#e8b4b8] text-[#543032]"
-            : "bg-gradient-to-r from-[#e8b4b8] via-[#dfa0a7] to-[#e8b4b8] shadow-xl shadow-quince text-[#543032]"
-        }`}
+            ? `linear-gradient(90deg, ${colors.blackLight}, ${colors.blackLight})`
+            : `linear-gradient(90deg, ${colors.orangeDark}, ${colors.orange}, ${colors.orangeDark})`,
+          backgroundSize: "200% 100%",
+          color: isPlaying ? colors.black : "#ffffff",
+          boxShadow: isPlaying
+            ? `0 4px 20px ${colors.orange}66`
+            : `0 4px 20px ${colors.orange}99`,
+        }}
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
+        onMouseEnter={(e) => {
+          if (!isLoading) {
+            e.currentTarget.style.backgroundImage = `linear-gradient(90deg, ${colors.purple}, ${colors.purpleLight}, ${colors.purple})`;
+            e.currentTarget.style.boxShadow = `0 6px 30px ${colors.purple}99`;
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isLoading) {
+            e.currentTarget.style.backgroundImage = isPlaying
+              ? `linear-gradient(90deg, ${colors.orange}, ${colors.orangeLight}, ${colors.orange})`
+              : `linear-gradient(90deg, ${colors.orangeDark}, ${colors.orange}, ${colors.orangeDark})`;
+            e.currentTarget.style.boxShadow = isPlaying
+              ? `0 4px 20px ${colors.orange}66`
+              : `0 4px 20px ${colors.orange}99`;
+          }
+        }}
       >
         {/* Efecto de brillo cuando está reproduciéndose */}
         {isPlaying && (
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)`,
+            }}
             initial={{ x: "-100%" }}
             animate={{ x: "100%" }}
             transition={{
@@ -119,8 +160,19 @@ const MusicPlayer = ({ className = "", showVolumeControl = true }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleMute}
-            className="text-[#d4989d] hover:text-[#c17b81] p-1 rounded-full transition-all duration-300"
+            className="p-1 rounded-full transition-all duration-300"
+            style={{
+              color: colors.orange,
+            }}
             aria-label={isMuted ? "Activar sonido" : "Silenciar"}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = colors.purple;
+              e.currentTarget.style.textShadow = `0 0 8px ${colors.purple}`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = colors.orange;
+              e.currentTarget.style.textShadow = "none";
+            }}
           >
             <motion.div
               animate={
@@ -144,13 +196,13 @@ const MusicPlayer = ({ className = "", showVolumeControl = true }) => {
             step="0.1"
             value={isMuted ? 0 : volume}
             onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-            className="w-16 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            className="w-16 h-1 rounded-lg appearance-none cursor-pointer slider"
             style={{
-              background: `linear-gradient(to right, 
-                #d4989d 0%, 
-                #d4989d ${(isMuted ? 0 : volume) * 100}%, 
-                #e5e7eb ${(isMuted ? 0 : volume) * 100}%, 
-                #e5e7eb 100%)`,
+              backgroundImage: `linear-gradient(to right, 
+                ${colors.orange} 0%, 
+                ${colors.orange} ${(isMuted ? 0 : volume) * 100}%, 
+                ${colors.blackLight} ${(isMuted ? 0 : volume) * 100}%, 
+                ${colors.blackLight} 100%)`,
             }}
           />
         </div>

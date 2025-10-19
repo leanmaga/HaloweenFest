@@ -314,7 +314,7 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            01 de Noviembre
+            25 de Octubre
           </motion.h2>
 
           <motion.p

@@ -9,19 +9,29 @@ import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 const navItems = [
   { name: "Inicio", href: "#hero" },
   { name: "Detalles", href: "#details" },
-  { name: "Galería", href: "#gallery" },
   { name: "Dress Code", href: "#dresscode" },
   { name: "Ubicación", href: "#location" },
   { name: "Música", href: "#music" },
   { name: "RSVP", href: "#rsvp" },
 ];
 
+// Colores de Halloween
+const halloweenColors = {
+  background: "#000000",
+  backgroundScrolled: "rgba(0, 0, 0, 0.95)",
+  orange: "#FF8C42",
+  orangeHover: "#FFA500",
+  purple: "#A855F7",
+  purpleGlow: "#8B5CF6",
+  border: "rgba(255, 140, 66, 0.2)",
+  borderScrolled: "rgba(255, 140, 66, 0.4)",
+};
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // ✅ Usar configuración centralizada
-  const { nombre, colores } = useHalloweenConfig();
+  const { nombre } = useHalloweenConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,12 +41,10 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Cerrar menú móvil cuando se hace click en un enlace
   const handleLinkClick = () => {
     setIsOpen(false);
   };
 
-  // Prevenir scroll cuando el menú móvil está abierto
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -51,21 +59,18 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Navbar fijo siempre arriba */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "shadow-lg backdrop-blur-md" : "backdrop-blur-sm"
+          scrolled ? "shadow-lg shadow-orange-500/20" : ""
         }`}
         style={{
           backgroundColor: scrolled
-            ? `${colores.primario[50]}e6` // 90% opacity
-            : `${colores.primario[50]}cc`, // 80% opacity
+            ? halloweenColors.backgroundScrolled
+            : halloweenColors.background,
           borderBottom: `1px solid ${
-            scrolled
-              ? `${colores.primario[200]}80`
-              : `${colores.primario[100]}4d`
+            scrolled ? halloweenColors.borderScrolled : halloweenColors.border
           }`,
         }}
       >
@@ -76,8 +81,8 @@ export default function Navigation() {
               whileHover={{ scale: 1.05 }}
               className="font-coockie text-xl sm:text-2xl md:text-3xl font-bold flex-shrink-0"
               style={{
-                color: colores.primario[600],
-                textShadow: `0 0 10px ${colores.primario[400]}, 0 0 20px ${colores.primario[500]}`,
+                color: halloweenColors.orange,
+                textShadow: `0 0 10px ${halloweenColors.orange}, 0 0 20px ${halloweenColors.orangeHover}`,
                 fontFamily: "var(--font-dancing)",
               }}
             >
@@ -95,18 +100,18 @@ export default function Navigation() {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{
                     scale: 1.05,
-                    textShadow: `0 0 8px ${colores.primario[400]}`,
+                    textShadow: `0 0 8px ${halloweenColors.purple}, 0 0 16px ${halloweenColors.purpleGlow}`,
                   }}
                   className="font-semibold transition-all text-sm lg:text-base whitespace-nowrap px-3 py-2 rounded-lg"
                   style={{
-                    color: colores.primario[800],
+                    color: halloweenColors.orange,
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.color = colores.primario[600];
-                    e.target.style.backgroundColor = `${colores.primario[100]}80`;
+                    e.target.style.color = halloweenColors.purple;
+                    e.target.style.backgroundColor = "rgba(168, 85, 247, 0.1)";
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.color = colores.primario[800];
+                    e.target.style.color = halloweenColors.orange;
                     e.target.style.backgroundColor = "transparent";
                   }}
                 >
@@ -137,15 +142,16 @@ export default function Navigation() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 rounded-lg transition-all"
                 style={{
-                  color: colores.primario[800],
-                  boxShadow: `0 2px 8px ${colores.primario[400]}4d`,
+                  color: halloweenColors.orange,
+                  boxShadow: `0 2px 8px ${halloweenColors.orange}33`,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = colores.primario[600];
-                  e.currentTarget.style.backgroundColor = `${colores.primario[100]}80`;
+                  e.currentTarget.style.color = halloweenColors.purple;
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(168, 85, 247, 0.1)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = colores.primario[800];
+                  e.currentTarget.style.color = halloweenColors.orange;
                   e.currentTarget.style.backgroundColor = "transparent";
                 }}
               >
@@ -168,7 +174,7 @@ export default function Navigation() {
                 className="md:hidden fixed inset-0 backdrop-blur-sm"
                 style={{
                   top: "64px",
-                  backgroundColor: `${colores.primario[900]}33`, // 20% opacity
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
                 }}
               />
 
@@ -180,9 +186,9 @@ export default function Navigation() {
                 transition={{ duration: 0.2 }}
                 className="md:hidden absolute top-full left-0 right-0 w-full backdrop-blur-md shadow-lg"
                 style={{
-                  backgroundColor: `${colores.primario[50]}f2`, // 95% opacity
-                  borderTop: `1px solid ${colores.primario[200]}80`,
-                  boxShadow: `0 8px 32px ${colores.primario[400]}4d`,
+                  backgroundColor: halloweenColors.backgroundScrolled,
+                  borderTop: `1px solid ${halloweenColors.borderScrolled}`,
+                  boxShadow: `0 8px 32px ${halloweenColors.orange}33`,
                 }}
               >
                 <div className="px-4 py-4 space-y-1">
@@ -196,19 +202,20 @@ export default function Navigation() {
                       onClick={handleLinkClick}
                       whileHover={{
                         scale: 1.02,
-                        textShadow: `0 0 8px ${colores.primario[400]}`,
+                        textShadow: `0 0 8px ${halloweenColors.purple}, 0 0 16px ${halloweenColors.purpleGlow}`,
                       }}
                       className="block py-3 px-3 font-semibold rounded-lg transition-all"
                       style={{
-                        color: colores.primario[800],
+                        color: halloweenColors.orange,
                         backdropFilter: "blur(10px)",
                       }}
                       onMouseEnter={(e) => {
-                        e.target.style.color = colores.primario[600];
-                        e.target.style.backgroundColor = `${colores.primario[100]}99`;
+                        e.target.style.color = halloweenColors.purple;
+                        e.target.style.backgroundColor =
+                          "rgba(168, 85, 247, 0.15)";
                       }}
                       onMouseLeave={(e) => {
-                        e.target.style.color = colores.primario[800];
+                        e.target.style.color = halloweenColors.orange;
                         e.target.style.backgroundColor = "transparent";
                       }}
                     >
@@ -223,30 +230,30 @@ export default function Navigation() {
                     transition={{ delay: navItems.length * 0.1 }}
                     className="pt-2 mt-2"
                     style={{
-                      borderTop: `1px solid ${colores.primario[400]}66`,
+                      borderTop: `1px solid ${halloweenColors.border}`,
                     }}
                   >
                     <div
                       className="py-2 px-3 text-sm font-semibold flex items-center gap-2"
                       style={{
-                        color: colores.primario[200],
-                        textShadow: `0 0 8px ${colores.primario[400]}66, 1px 1px 2px rgba(0,0,0,0.3)`,
+                        color: halloweenColors.orange,
+                        textShadow: `0 0 8px ${halloweenColors.orange}66`,
                       }}
                     >
                       <motion.div
                         animate={{
                           rotate: [0, 360],
                           color: [
-                            colores.terciario[300],
-                            colores.primario[400],
-                            colores.primario[500],
-                            colores.terciario[400],
-                            colores.terciario[300],
+                            halloweenColors.orange,
+                            halloweenColors.purple,
+                            halloweenColors.purpleGlow,
+                            halloweenColors.orangeHover,
+                            halloweenColors.orange,
                           ],
                           filter: [
-                            `drop-shadow(0 0 8px ${colores.primario[400]})`,
-                            `drop-shadow(0 0 12px ${colores.primario[500]})`,
-                            `drop-shadow(0 0 8px ${colores.primario[400]})`,
+                            `drop-shadow(0 0 8px ${halloweenColors.orange})`,
+                            `drop-shadow(0 0 12px ${halloweenColors.purple})`,
+                            `drop-shadow(0 0 8px ${halloweenColors.orange})`,
                           ],
                         }}
                         transition={{
