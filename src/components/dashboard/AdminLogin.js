@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Crown, Eye, EyeOff, AlertCircle } from "lucide-react";
+import { Ghost, Eye, EyeOff, AlertCircle } from "lucide-react";
 
 export default function AdminLogin({
   password,
@@ -13,23 +13,23 @@ export default function AdminLogin({
   nombre,
 }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-quince-50 to-gold-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-900 via-purple-900 to-black flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md"
+        className="bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-2xl border-2 border-orange-500 p-8 w-full max-w-md"
       >
         <div className="text-center mb-8">
-          <Crown className="w-12 h-12 text-quince-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+          <Ghost className="w-12 h-12 text-orange-500 mx-auto mb-4 animate-pulse" />
+          <h1 className="text-2xl font-bold text-orange-500 mb-2">
             Panel de Administración
           </h1>
-          <p className="text-gray-600">{nombre} - Acceso Restringido</p>
+          <p className="text-purple-300">{nombre} - Acceso Restringido</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-orange-400 mb-2">
               Contraseña de Administrador
             </label>
             <div className="relative">
@@ -37,14 +37,14 @@ export default function AdminLogin({
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-quince-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-800 border border-orange-500 text-white rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-gray-500"
                 placeholder="Ingresa la contraseña"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-orange-500"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -54,7 +54,7 @@ export default function AdminLogin({
               </button>
             </div>
             {authError && (
-              <div className="mt-2 flex items-center gap-2 text-red-600">
+              <div className="mt-2 flex items-center gap-2 text-red-500">
                 <AlertCircle className="w-4 h-4" />
                 <span className="text-sm">{authError}</span>
               </div>
@@ -63,7 +63,7 @@ export default function AdminLogin({
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-quince-500 to-quince-600 text-white py-3 rounded-xl font-semibold hover:from-quince-600 hover:to-quince-700 transition-all"
+            className="w-full bg-gradient-to-r from-orange-600 to-orange-700 text-white py-3 rounded-xl font-semibold hover:from-orange-700 hover:to-orange-800 transition-all shadow-lg shadow-orange-500/50"
           >
             Iniciar Sesión
           </button>
@@ -72,7 +72,7 @@ export default function AdminLogin({
         <div className="mt-6">
           <button
             onClick={() => (window.location.href = "/")}
-            className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
+            className="w-full bg-purple-900 text-purple-200 py-3 rounded-xl font-medium hover:bg-purple-800 transition-all flex items-center justify-center gap-2 border border-purple-700"
           >
             <svg
               className="w-4 h-4"
@@ -91,8 +91,8 @@ export default function AdminLogin({
           </button>
         </div>
 
-        <div className="mt-6 text-center text-xs text-gray-500">
-          Solo para administradores autorizados
+        <div className="mt-6 text-center text-xs text-orange-400">
+          Solo para administradores autorizados 👻
         </div>
       </motion.div>
     </div>

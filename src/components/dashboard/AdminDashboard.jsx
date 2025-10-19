@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Crown, RefreshCw, LogOut } from "lucide-react";
+import { Ghost, RefreshCw, LogOut } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 import {
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
   const [isDeletingConfirmation, setIsDeletingConfirmation] = useState(false);
   const [stats, setStats] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState("all"); // Renombrado de filterGuests
+  const [filterType, setFilterType] = useState("all");
 
   // Usar hook centralizado para configuración
   const { nombre, adminPassword } = useHalloweenConfig();
@@ -50,7 +50,7 @@ export default function AdminDashboard() {
   // ESTADOS PARA LOS MODALES PERSONALIZADOS
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,
-    type: null, // 'song' | 'confirmation'
+    type: null,
     item: null,
   });
   const [successToast, setSuccessToast] = useState({
@@ -118,7 +118,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // CORREGIDA: función calculateStats sin referencias a guests
   const calculateStats = (rsvpData, songsData = songs) => {
     const withDietary = rsvpData.filter(
       (item) => item.dietary_restrictions
@@ -229,7 +228,6 @@ export default function AdminDashboard() {
         throw error;
       }
 
-      // Actualizar estado local
       const updated = songs.filter((s) => s.id !== id);
       setSongs(updated);
       calculateStats(confirmations, updated);
@@ -255,7 +253,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // CORREGIDA: función exportToCSV con campos exactos
   const exportToCSV = () => {
     const headers = ["Nombre", "Teléfono", "Restricciones", "Mensaje", "Fecha"];
     const rows = confirmations.map((item) => [
@@ -279,7 +276,6 @@ export default function AdminDashboard() {
     link.click();
   };
 
-  // CORREGIDA: filtros actualizados sin referencias a guests
   const filteredConfirmations = confirmations.filter((item) => {
     const matchSearch =
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -296,8 +292,8 @@ export default function AdminDashboard() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-quince-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-orange-900 via-purple-900 to-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
       </div>
     );
   }
@@ -317,17 +313,17 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gradient-to-br from-orange-900 via-purple-900 to-black">
+      <div className="bg-gradient-to-r from-gray-900 to-black border-b-2 border-orange-500 shadow-lg shadow-orange-500/20">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div className="flex items-center gap-2 sm:gap-3">
-              <Crown className="w-6 h-6 sm:w-8 sm:h-8 text-quince-500 flex-shrink-0" />
+              <Ghost className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500 flex-shrink-0 animate-pulse" />
               <div className="min-w-0">
-                <h1 className="text-lg sm:text-xl font-semibold text-gray-900 truncate">
+                <h1 className="text-lg sm:text-xl font-semibold text-orange-500 truncate">
                   Admin - {nombre}
                 </h1>
-                <p className="text-xs sm:text-sm text-gray-600">
+                <p className="text-xs sm:text-sm text-purple-300">
                   Gestión de confirmaciones
                 </p>
               </div>
@@ -336,7 +332,7 @@ export default function AdminDashboard() {
               <button
                 onClick={loadDashboardData}
                 disabled={loading}
-                className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors disabled:opacity-50 text-sm"
+                className="flex items-center gap-2 px-3 py-2 text-orange-400 hover:text-orange-300 transition-colors disabled:opacity-50 text-sm"
               >
                 <RefreshCw
                   className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
@@ -345,7 +341,7 @@ export default function AdminDashboard() {
               </button>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm"
+                className="flex items-center gap-2 px-3 py-2 text-purple-400 hover:text-purple-300 transition-colors text-sm"
               >
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Cerrar Sesión</span>
@@ -360,8 +356,8 @@ export default function AdminDashboard() {
         <AdminFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          filterGuests={filterType} // Nota: el prop sigue siendo filterGuests por compatibilidad
-          setFilterGuests={setFilterType} // pero internamente usa filterType
+          filterGuests={filterType}
+          setFilterGuests={setFilterType}
           exportToCSV={exportToCSV}
           hasData={confirmations.length > 0}
         />

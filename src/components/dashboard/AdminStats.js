@@ -10,40 +10,45 @@ export default function AdminStats({ stats }) {
       title: "Total Confirmaciones",
       value: stats.totalConfirmations || 0,
       icon: Users,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-orange-400",
+      bgColor: "bg-orange-900/30",
+      borderColor: "border-orange-500",
       description: "Personas confirmadas",
     },
     {
       title: "Con Teléfono",
       value: stats.withPhone || 0,
       icon: Phone,
-      color: "text-green-600",
-      bgColor: "bg-green-50",
+      color: "text-green-400",
+      bgColor: "bg-green-900/30",
+      borderColor: "border-green-500",
       description: "Teléfonos proporcionados",
     },
     {
       title: "Restricciones Alimentarias",
       value: stats.withDietary || 0,
       icon: Utensils,
-      color: "text-orange-600",
-      bgColor: "bg-orange-50",
+      color: "text-orange-500",
+      bgColor: "bg-orange-800/30",
+      borderColor: "border-orange-600",
       description: "Con restricciones",
     },
     {
       title: "Con Mensajes",
       value: stats.withMessages || 0,
       icon: MessageSquare,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-purple-400",
+      bgColor: "bg-purple-900/30",
+      borderColor: "border-purple-500",
       description: "Mensajes especiales",
     },
     {
       title: "Canciones Solicitadas",
       value: stats.totalSongs || 0,
       icon: Music,
-      color: "text-pink-600",
-      bgColor: "bg-pink-50",
+      color: "text-purple-500",
+      bgColor: "bg-purple-800/30",
+      borderColor: "border-purple-600",
       description: "Peticiones musicales",
     },
   ];
@@ -56,19 +61,21 @@ export default function AdminStats({ stats }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="bg-white rounded-2xl shadow-md p-6"
+          className={`bg-gradient-to-b from-gray-900 to-black rounded-2xl shadow-2xl border-2 ${stat.borderColor} p-6 hover:shadow-orange-500/20 transition-shadow`}
         >
           <div className="flex items-center justify-between">
-            <div className={`p-3 rounded-xl ${stat.bgColor}`}>
+            <div
+              className={`p-3 rounded-xl ${stat.bgColor} border ${stat.borderColor}`}
+            >
               <stat.icon className={`w-6 h-6 ${stat.color}`} />
             </div>
           </div>
           <div className="mt-4">
-            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-            <p className="text-sm font-medium text-gray-900 mt-1">
+            <p className="text-2xl font-bold text-orange-400">{stat.value}</p>
+            <p className="text-sm font-medium text-orange-300 mt-1">
               {stat.title}
             </p>
-            <p className="text-xs text-gray-500 mt-1">{stat.description}</p>
+            <p className="text-xs text-purple-300 mt-1">{stat.description}</p>
           </div>
         </motion.div>
       ))}
