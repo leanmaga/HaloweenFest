@@ -241,10 +241,6 @@ export function useHalloweenConfig() {
     fuentes,
   };
 }
-
-/**
- * 🎨 HOOK PARA OBTENER SOLO LOS COLORES HALLOWEEN
- */
 export function useHalloweenColors() {
   return {
     naranja: "#FF6B35",
