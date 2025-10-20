@@ -6,7 +6,6 @@ import { useHalloweenConfig, useDressCode } from "@/hooks/useHalloweenConfig";
 import { supabase } from "@/lib/supabase";
 
 export default function DressCodeSection() {
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [particles, setParticles] = useState([]);
 
   // Estados para el registro de disfraces

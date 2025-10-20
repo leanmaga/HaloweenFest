@@ -1,10 +1,13 @@
 "use client";
 
-import { MapPin, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+import { MapPin, Phone, Sparkles } from "lucide-react";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function LocationSection() {
-  // ✅ Usar configuración centralizada
+  // ✅ Estado para las partículas
+  const [particles, setParticles] = useState([]);
+
   const config = useHalloweenConfig();
 
   const {
@@ -16,6 +19,19 @@ export default function LocationSection() {
     colores,
   } = config;
 
+  // ✅ Generar partículas al montar el componente
+  useEffect(() => {
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 4,
+      duration: 3 + Math.random() * 2,
+      emoji: ["🎃", "👻", "🦇", "💀", "🕷️"][Math.floor(Math.random() * 5)],
+    }));
+    setParticles(newParticles);
+  }, []);
+
   return (
     <section
       id="location"
@@ -24,7 +40,45 @@ export default function LocationSection() {
         background: `${colores.negro}`,
       }}
     >
-      <div className="max-w-6xl mx-auto px-4">
+      {/* ✅ PARTÍCULAS FLOTANTES DE FONDO */}
+      <div className="absolute inset-0 pointer-events-none">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute text-2xl"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              animation: `float ${particle.duration}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`,
+              opacity: 0.3,
+            }}
+          >
+            {particle.emoji}
+          </div>
+        ))}
+      </div>
+
+      {/* ✅ SPARKLES DECORATIVOS (OPCIONAL) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute"
+            style={{
+              left: `${20 + i * 10}%`,
+              top: `${10 + (i % 3) * 30}%`,
+              animation: `pulse 2s ease-in-out infinite`,
+              animationDelay: `${i * 0.5}s`,
+            }}
+          >
+            <Sparkles className="w-4 h-4 opacity-60 text-orange-500" />
+          </div>
+        ))}
+      </div>
+
+      {/* ✅ Contenido existente (añadir relative z-10) */}
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="text-6xl mb-4">📍</div>
           <h2
@@ -131,6 +185,30 @@ export default function LocationSection() {
           </div>
         </div>
       </div>
+
+      {/* ✅ ESTILOS DE ANIMACIÓN */}
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.7;
+            transform: scale(1.1);
+          }
+        }
+      `}</style>
     </section>
   );
 }
