@@ -1,22 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sparkles, Send, Loader2, CheckCircle, Users } from "lucide-react";
-import { useHalloweenConfig, useDressCode } from "@/hooks/useHalloweenConfig";
+import { Sparkles, Loader2, Users } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function DressCodeSection() {
   const [particles, setParticles] = useState([]);
-
-  // Estados para el registro de disfraces
   const [costumes, setCostumes] = useState([]);
-  const [formData, setFormData] = useState({ name: "", costume: "" });
-  const [loading, setLoading] = useState(false);
   const [loadingCostumes, setLoadingCostumes] = useState(true);
-  const [submitted, setSubmitted] = useState(false);
 
   const { colores } = useHalloweenConfig();
-  const dressCode = useDressCode();
 
   // Generar partículas flotantes
   useEffect(() => {
@@ -35,49 +29,25 @@ export default function DressCodeSection() {
 
   const loadCostumes = async () => {
     try {
+      // Obtener datos reales de rsvp_confirmations
       const { data, error } = await supabase
-        .from("costume_registrations")
-        .select("*")
+        .from("rsvp_confirmations")
+        .select("costume, created_at")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setCostumes(data || []);
+
+      // Filtrar solo los que tienen disfraz informado
+      const costumesWithData = (data || []).filter(
+        (item) => item.costume && item.costume.trim() !== ""
+      );
+
+      setCostumes(costumesWithData);
     } catch (error) {
       console.error("Error loading costumes:", error);
+      setCostumes([]);
     } finally {
       setLoadingCostumes(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!formData.name.trim() || !formData.costume.trim()) return;
-
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from("costume_registrations")
-        .insert([
-          {
-            name: formData.name.trim(),
-            costume: formData.costume.trim(),
-          },
-        ])
-        .select();
-
-      if (error) throw error;
-
-      setCostumes([data[0], ...costumes]);
-      setFormData({ name: "", costume: "" });
-      setSubmitted(true);
-
-      setTimeout(() => setSubmitted(false), 3000);
-    } catch (error) {
-      console.error("Error submitting costume:", error);
-      alert("Hubo un error al registrar tu disfraz. Intenta nuevamente.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -161,10 +131,12 @@ export default function DressCodeSection() {
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ color: colores.naranja }}
             >
-              {dressCode.tema}
+              ¡Disfrázate y Aterrroriza! 👻
             </h3>
             <p className="text-xl text-orange-300 max-w-3xl mx-auto">
-              {dressCode.descripcion}
+              La noche más oscura del año merece el mejor disfraz. Ven
+              disfrazado de tu personaje más terrorífico, creativo o
+              extravagante.
             </p>
           </div>
 
@@ -252,88 +224,7 @@ export default function DressCodeSection() {
             </div>
           </div>
 
-          {/* Formulario de Registro de Disfraz */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <div
-              className="glass-morphism rounded-2xl p-8 border-2"
-              style={{
-                borderColor: colores.dorado,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-              }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="text-3xl">📝</div>
-                <h4
-                  className="text-2xl font-bold"
-                  style={{ color: colores.dorado }}
-                >
-                  Registrá tu Disfraz
-                </h4>
-              </div>
-
-              <p className="text-orange-300 mb-6">
-                ¡Anotá de qué vas a venir para que no se repitan los disfraces!
-              </p>
-
-              <div className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    placeholder="Tu nombre"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    disabled={loading}
-                    className="px-4 py-3 bg-gray-900/80 border-2 rounded-xl focus:outline-none focus:ring-2 transition-all text-white placeholder-gray-500"
-                    style={{
-                      borderColor: `${colores.naranja}80`,
-                    }}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Tu disfraz (ej: Vampiro)"
-                    value={formData.costume}
-                    onChange={(e) =>
-                      setFormData({ ...formData, costume: e.target.value })
-                    }
-                    disabled={loading}
-                    className="px-4 py-3 bg-gray-900/80 border-2 rounded-xl focus:outline-none focus:ring-2 transition-all text-white placeholder-gray-500"
-                    style={{
-                      borderColor: `${colores.naranja}80`,
-                    }}
-                  />
-                </div>
-
-                <button
-                  onClick={handleSubmit}
-                  disabled={
-                    loading || !formData.name.trim() || !formData.costume.trim()
-                  }
-                  className="w-full px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-black"
-                  style={{
-                    background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
-                  }}
-                >
-                  {loading ? (
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                  ) : submitted ? (
-                    <>
-                      <CheckCircle className="w-5 h-5" />
-                      ¡Registrado!
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Registrar Disfraz
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Lista de Disfraces Registrados */}
+          {/* Lista de Disfraces Registrados (ANÓNIMA) */}
           <div className="max-w-4xl mx-auto">
             <div
               className="glass-morphism rounded-2xl p-8 border-2"
@@ -352,7 +243,7 @@ export default function DressCodeSection() {
                     className="text-2xl font-bold"
                     style={{ color: colores.naranja }}
                   >
-                    Disfraces Registrados
+                    Disfraces Confirmados
                   </h4>
                 </div>
                 <span
@@ -373,9 +264,9 @@ export default function DressCodeSection() {
                 </div>
               ) : costumes.length > 0 ? (
                 <div className="space-y-3 max-h-96 overflow-y-auto custom-scrollbar">
-                  {costumes.map((costume, index) => (
+                  {costumes.map((item, index) => (
                     <div
-                      key={costume.id}
+                      key={`${item.costume}-${index}`}
                       className="flex items-center gap-4 p-4 rounded-xl border transition-all hover:scale-[1.02]"
                       style={{
                         backgroundColor: `${colores.naranja}10`,
@@ -392,11 +283,8 @@ export default function DressCodeSection() {
                         {index + 1}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-orange-200 truncate">
-                          {costume.name}
-                        </p>
                         <p className="text-sm text-orange-400 truncate">
-                          🎭 {costume.costume}
+                          🎭 {item.costume}
                         </p>
                       </div>
                     </div>
@@ -405,10 +293,18 @@ export default function DressCodeSection() {
               ) : (
                 <div className="text-center py-8 text-orange-300">
                   <p className="text-lg">
-                    ¡Sé el primero en registrar tu disfraz! 👻
+                    ¡Sé el primero en confirmar tu disfraz! 👻
                   </p>
                 </div>
               )}
+
+              {/* Mensaje siempre visible */}
+              <div className="mt-6 pt-6 border-t border-orange-500/30">
+                <p className="text-center text-sm text-orange-400">
+                  Cuando confirmes tu asistencia, podés agregar qué disfraz vas
+                  a usar
+                </p>
+              </div>
             </div>
           </div>
         </div>

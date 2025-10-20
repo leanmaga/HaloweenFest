@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, MessageSquare, Phone, Music } from "lucide-react";
+import { Users, MessageSquare, Phone, Music, Wand2 } from "lucide-react";
 
 export default function AdminStats({ stats }) {
   const statCards = [
@@ -24,7 +24,6 @@ export default function AdminStats({ stats }) {
       borderColor: "border-green-500",
       description: "Teléfonos proporcionados",
     },
-
     {
       title: "Con Mensajes",
       value: stats.withMessages || 0,
@@ -33,6 +32,15 @@ export default function AdminStats({ stats }) {
       bgColor: "bg-purple-900/30",
       borderColor: "border-purple-500",
       description: "Mensajes especiales",
+    },
+    {
+      title: "Con Disfraz",
+      value: stats.withCostume || 0,
+      icon: Wand2,
+      color: "text-amber-400",
+      bgColor: "bg-amber-900/30",
+      borderColor: "border-amber-500",
+      description: "Disfraces confirmados",
     },
     {
       title: "Canciones Solicitadas",

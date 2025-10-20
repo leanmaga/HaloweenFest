@@ -40,6 +40,15 @@ export default function LocationSection() {
         background: `${colores.negro}`,
       }}
     >
+      <div
+        className="absolute top-20 left-10 w-64 h-64 rounded-full opacity-20 blur-3xl"
+        style={{ backgroundColor: colores.naranja }}
+      />
+      <div
+        className="absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 blur-3xl"
+        style={{ backgroundColor: colores.morado }}
+      />
+
       {/* ✅ PARTÍCULAS FLOTANTES DE FONDO */}
       <div className="absolute inset-0 pointer-events-none">
         {particles.map((particle) => (

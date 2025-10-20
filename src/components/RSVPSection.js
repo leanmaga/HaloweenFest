@@ -17,6 +17,7 @@ export default function RSVPSection() {
     name: "",
     phone: "",
     message: "",
+    costume: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -53,6 +54,7 @@ export default function RSVPSection() {
           phone: data.phone || null,
           guests: 1,
           message: data.message || null,
+          costume: data.costume || null,
         },
       ]);
 
@@ -101,6 +103,10 @@ export default function RSVPSection() {
     let message = `🎃 *CONFIRMACIÓN DE ASISTENCIA - HALLOWEEN PARTY 2025*\n\n`;
     message += `👤 *Nombre:* ${data.name}\n`;
     message += `📱 *Teléfono:* ${data.phone || "No proporcionado"}\n`;
+
+    if (data.costume) {
+      message += `🎭 *Disfraz:* ${data.costume}\n`;
+    }
 
     if (data.message) {
       message += `💀 *Mensaje:* ${data.message}\n`;
@@ -154,6 +160,18 @@ export default function RSVPSection() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setExistingRSVP(null);
+    setIsFlipped(false);
+    setFormData({
+      name: "",
+      phone: "",
+      message: "",
+      costume: "",
+    });
   };
 
   // PANTALLA DE CONFIRMACIÓN
@@ -221,6 +239,15 @@ export default function RSVPSection() {
                       </span>
                     </div>
                   )}
+                  {rsvpData.costume && (
+                    <div className="flex items-center gap-2 text-orange-200">
+                      <span className="text-lg">🎭</span>
+                      <span>
+                        <strong className="text-orange-400">Disfraz:</strong>{" "}
+                        {rsvpData.costume}
+                      </span>
+                    </div>
+                  )}
                   {rsvpData.message && (
                     <div className="flex items-start gap-2 text-orange-200">
                       <span className="text-lg">💀</span>
@@ -234,16 +261,7 @@ export default function RSVPSection() {
               </div>
 
               <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setExistingRSVP(null);
-                  setIsFlipped(false);
-                  setFormData({
-                    name: "",
-                    phone: "",
-                    message: "",
-                  });
-                }}
+                onClick={resetForm}
                 className="px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 text-black"
                 style={{
                   background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
@@ -330,6 +348,17 @@ export default function RSVPSection() {
                             </span>
                           </div>
                         )}
+                        {rsvpData.costume && (
+                          <div className="flex items-center gap-3 text-lg text-orange-200">
+                            <span className="text-2xl">🎭</span>
+                            <span>
+                              <strong className="text-orange-400">
+                                Disfraz:
+                              </strong>{" "}
+                              {rsvpData.costume}
+                            </span>
+                          </div>
+                        )}
                         {rsvpData.message && (
                           <div className="flex items-start gap-3 text-lg text-orange-200">
                             <span className="text-2xl">💀</span>
@@ -345,16 +374,7 @@ export default function RSVPSection() {
                     </div>
 
                     <button
-                      onClick={() => {
-                        setSubmitted(false);
-                        setExistingRSVP(null);
-                        setIsFlipped(false);
-                        setFormData({
-                          name: "",
-                          phone: "",
-                          message: "",
-                        });
-                      }}
+                      onClick={resetForm}
                       className="px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 text-black"
                       style={{
                         background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
@@ -519,6 +539,25 @@ export default function RSVPSection() {
                             borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="+54 11 3566-0145"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                          <span className="text-lg">🎭</span>
+                          Disfraz
+                        </label>
+                        <input
+                          type="text"
+                          name="costume"
+                          value={formData.costume}
+                          onChange={handleChange}
+                          disabled={loading}
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
+                          style={{
+                            borderColor: `${colores.naranja}80`,
+                          }}
+                          placeholder="Ej: Vampiro, Bruja, Personaje de película..."
                         />
                       </div>
 
@@ -695,6 +734,25 @@ export default function RSVPSection() {
                             borderColor: `${colores.naranja}80`,
                           }}
                           placeholder="+54 11 3566-0145"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="font-medium mb-2 flex items-center gap-2 text-orange-300">
+                          <span className="text-lg">🎭</span>
+                          <span className="text-sm">Disfraz</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="costume"
+                          value={formData.costume}
+                          onChange={handleChange}
+                          disabled={loading}
+                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
+                          style={{
+                            borderColor: `${colores.naranja}80`,
+                          }}
+                          placeholder="Ej: Vampiro, Bruja, Personaje de película..."
                         />
                       </div>
 

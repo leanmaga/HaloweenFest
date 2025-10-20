@@ -37,6 +37,9 @@ export default function AdminConfirmationsTable({
                   Teléfono
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
+                  Disfraz
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
                   Mensaje
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
@@ -79,6 +82,20 @@ export default function AdminConfirmationsTable({
                         <span className="text-gray-500 text-xs flex items-center gap-2">
                           <Phone className="w-4 h-4 text-gray-600" />
                           Sin teléfono
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-sm">
+                      {guest.costume ? (
+                        <div className="flex items-center gap-2 bg-amber-900/40 text-amber-200 px-3 py-1 rounded-lg w-fit border border-amber-500/30">
+                          <span>🎭</span>
+                          <span className="font-medium truncate max-w-xs">
+                            {guest.costume}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-gray-500 text-xs">
+                          Sin disfraz
                         </span>
                       )}
                     </td>
