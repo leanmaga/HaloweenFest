@@ -1,15 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sparkles, Star } from "lucide-react";
-import Image from "next/image";
+import { Sparkles, Send, Loader2, CheckCircle, Users } from "lucide-react";
 import { useHalloweenConfig, useDressCode } from "@/hooks/useHalloweenConfig";
+import { supabase } from "@/lib/supabase";
 
 export default function DressCodeSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [particles, setParticles] = useState([]);
 
-  // ✅ Usar configuración centralizada
+  // Estados para el registro de disfraces
+  const [costumes, setCostumes] = useState([]);
+  const [formData, setFormData] = useState({ name: "", costume: "" });
+  const [loading, setLoading] = useState(false);
+  const [loadingCostumes, setLoadingCostumes] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
+
   const { colores } = useHalloweenConfig();
   const dressCode = useDressCode();
 
@@ -24,7 +30,57 @@ export default function DressCodeSection() {
       emoji: ["🎃", "👻", "🦇", "💀", "🕷️"][Math.floor(Math.random() * 5)],
     }));
     setParticles(newParticles);
+
+    loadCostumes();
   }, []);
+
+  const loadCostumes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("costume_registrations")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setCostumes(data || []);
+    } catch (error) {
+      console.error("Error loading costumes:", error);
+    } finally {
+      setLoadingCostumes(false);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.name.trim() || !formData.costume.trim()) return;
+
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("costume_registrations")
+        .insert([
+          {
+            name: formData.name.trim(),
+            costume: formData.costume.trim(),
+          },
+        ])
+        .select();
+
+      if (error) throw error;
+
+      setCostumes([data[0], ...costumes]);
+      setFormData({ name: "", costume: "" });
+      setSubmitted(true);
+
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      console.error("Error submitting costume:", error);
+      alert("Hubo un error al registrar tu disfraz. Intenta nuevamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
@@ -190,16 +246,171 @@ export default function DressCodeSection() {
                   className="text-center text-lg font-semibold"
                   style={{ color: colores.dorado }}
                 >
-                  🏆 1° Premio: Champagne <br></br>
+                  🏆 1° Premio: Champagne <br />
                   🏆 2° Premio: Vino
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Grid de Cards para Inspiración Visual */}
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto"></div>
+          {/* Formulario de Registro de Disfraz */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <div
+              className="glass-morphism rounded-2xl p-8 border-2"
+              style={{
+                borderColor: colores.dorado,
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-3xl">📝</div>
+                <h4
+                  className="text-2xl font-bold"
+                  style={{ color: colores.dorado }}
+                >
+                  Registrá tu Disfraz
+                </h4>
+              </div>
+
+              <p className="text-orange-300 mb-6">
+                ¡Anotá de qué vas a venir para que no se repitan los disfraces!
+              </p>
+
+              <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    disabled={loading}
+                    className="px-4 py-3 bg-gray-900/80 border-2 rounded-xl focus:outline-none focus:ring-2 transition-all text-white placeholder-gray-500"
+                    style={{
+                      borderColor: `${colores.naranja}80`,
+                    }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Tu disfraz (ej: Vampiro)"
+                    value={formData.costume}
+                    onChange={(e) =>
+                      setFormData({ ...formData, costume: e.target.value })
+                    }
+                    disabled={loading}
+                    className="px-4 py-3 bg-gray-900/80 border-2 rounded-xl focus:outline-none focus:ring-2 transition-all text-white placeholder-gray-500"
+                    style={{
+                      borderColor: `${colores.naranja}80`,
+                    }}
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={
+                    loading || !formData.name.trim() || !formData.costume.trim()
+                  }
+                  className="w-full px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-black"
+                  style={{
+                    background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
+                  }}
+                >
+                  {loading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : submitted ? (
+                    <>
+                      <CheckCircle className="w-5 h-5" />
+                      ¡Registrado!
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Registrar Disfraz
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Lista de Disfraces Registrados */}
+          <div className="max-w-4xl mx-auto">
+            <div
+              className="glass-morphism rounded-2xl p-8 border-2"
+              style={{
+                borderColor: colores.naranja,
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+              }}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <Users
+                    className="w-6 h-6"
+                    style={{ color: colores.naranja }}
+                  />
+                  <h4
+                    className="text-2xl font-bold"
+                    style={{ color: colores.naranja }}
+                  >
+                    Disfraces Registrados
+                  </h4>
+                </div>
+                <span
+                  className="px-3 py-1 rounded-full text-sm font-semibold"
+                  style={{
+                    backgroundColor: `${colores.naranja}30`,
+                    color: colores.dorado,
+                  }}
+                >
+                  {costumes.length}{" "}
+                  {costumes.length === 1 ? "disfraz" : "disfraces"}
+                </span>
+              </div>
+
+              {loadingCostumes ? (
+                <div className="text-center py-8">
+                  <Loader2 className="w-8 h-8 animate-spin mx-auto text-orange-500" />
+                </div>
+              ) : costumes.length > 0 ? (
+                <div className="space-y-3 max-h-96 overflow-y-auto custom-scrollbar">
+                  {costumes.map((costume, index) => (
+                    <div
+                      key={costume.id}
+                      className="flex items-center gap-4 p-4 rounded-xl border transition-all hover:scale-[1.02]"
+                      style={{
+                        backgroundColor: `${colores.naranja}10`,
+                        borderColor: `${colores.naranja}30`,
+                      }}
+                    >
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0"
+                        style={{
+                          backgroundColor: colores.naranja,
+                          color: colores.negro,
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-orange-200 truncate">
+                          {costume.name}
+                        </p>
+                        <p className="text-sm text-orange-400 truncate">
+                          🎭 {costume.costume}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-orange-300">
+                  <p className="text-lg">
+                    ¡Sé el primero en registrar tu disfraz! 👻
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -236,12 +447,6 @@ export default function DressCodeSection() {
         .dresscode-slide-up {
           animation: slideUp 0.8s ease-out;
         }
-        .dresscode-slide-left {
-          animation: slideLeft 0.8s ease-out;
-        }
-        .dresscode-slide-right {
-          animation: slideRight 0.8s ease-out;
-        }
         @keyframes slideUp {
           from {
             opacity: 0;
@@ -252,34 +457,22 @@ export default function DressCodeSection() {
             transform: translateY(0);
           }
         }
-        @keyframes slideLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes slideRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        .dresscode-card-hover {
-          transition: all 0.3s ease;
-        }
-        .dresscode-card-hover:hover {
-          transform: translateY(-8px);
-        }
         .glass-morphism {
           backdrop-filter: blur(10px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: ${colores.naranja};
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: ${colores.dorado};
         }
       `}</style>
     </section>
