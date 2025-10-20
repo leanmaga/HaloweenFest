@@ -57,9 +57,9 @@ export const clientConfig = {
 
   // 📝 CONFIRMACIÓN DE ASISTENCIA (RSVP)
   rsvp: {
-    fechaLimite: "Miércoles 22 de Octubre, 2025",
+    fechaLimite: "Viernes 24 de Octubre, 2025",
     // Fecha límite en formato ISO para validaciones
-    fechaLimiteISO: "2025-10-22",
+    fechaLimiteISO: "2025-10-24",
     mensajeCierre: "¡Gracias por confirmar tu asistencia!",
     mostrarDietaryRestrictions: true, // Mostrar campo de restricciones alimentarias
   },

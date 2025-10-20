@@ -66,7 +66,7 @@ export function useHalloweenConfig() {
   const codigoVestimenta = {
     tema: "¡Disfraz Obligatorio!",
     descripcion:
-      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+      "Vení caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
   };
 
   // 🔐 ADMIN
@@ -262,7 +262,7 @@ export function useDressCode() {
   return {
     tema: "¡Disfraz Obligatorio!",
     descripcion:
-      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+      "Vení caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
   };
 }
 

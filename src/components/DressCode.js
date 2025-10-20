@@ -131,10 +131,10 @@ export default function DressCodeSection() {
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ color: colores.naranja }}
             >
-              ¡Disfrázate y Aterrroriza! 👻
+              ¡Disfrazate y Aterrroriza! 👻
             </h3>
             <p className="text-xl text-orange-300 max-w-3xl mx-auto">
-              La noche más oscura del año merece el mejor disfraz. Ven
+              La noche más oscura del año merece el mejor disfraz. Vení
               disfrazado de tu personaje más terrorífico, creativo o
               extravagante.
             </p>
@@ -217,8 +217,8 @@ export default function DressCodeSection() {
                   className="text-center text-lg font-semibold"
                   style={{ color: colores.dorado }}
                 >
-                  🏆 1° Premio: Champagne <br />
-                  🏆 2° Premio: Vino
+                  🏆 1° Premio: Botella de Champagne <br />
+                  🏆 2° Premio: Botella de Vino
                 </p>
               </div>
             </div>

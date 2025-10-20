@@ -314,7 +314,7 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            25 de Octubre
+            Sábado 25 de Octubre
           </motion.h2>
           <motion.h2
             className="text-4xl lg:text-5xl font-bold mb-6"
