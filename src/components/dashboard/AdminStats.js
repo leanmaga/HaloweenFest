@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, MessageSquare, Utensils, Phone, Music } from "lucide-react";
+import { Users, MessageSquare, Phone, Music } from "lucide-react";
 
 export default function AdminStats({ stats }) {
   const statCards = [
@@ -24,15 +24,7 @@ export default function AdminStats({ stats }) {
       borderColor: "border-green-500",
       description: "Teléfonos proporcionados",
     },
-    {
-      title: "Restricciones Alimentarias",
-      value: stats.withDietary || 0,
-      icon: Utensils,
-      color: "text-orange-500",
-      bgColor: "bg-orange-800/30",
-      borderColor: "border-orange-600",
-      description: "Con restricciones",
-    },
+
     {
       title: "Con Mensajes",
       value: stats.withMessages || 0,

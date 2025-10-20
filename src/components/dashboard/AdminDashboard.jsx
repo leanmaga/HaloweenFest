@@ -119,15 +119,11 @@ export default function AdminDashboard() {
   };
 
   const calculateStats = (rsvpData, songsData = songs) => {
-    const withDietary = rsvpData.filter(
-      (item) => item.dietary_restrictions
-    ).length;
     const withMessages = rsvpData.filter((item) => item.message).length;
     const withPhone = rsvpData.filter((item) => item.phone).length;
 
     setStats({
       totalConfirmations: rsvpData.length,
-      withDietary,
       withMessages,
       withPhone,
       totalSongs: songsData.length,
@@ -254,11 +250,10 @@ export default function AdminDashboard() {
   };
 
   const exportToCSV = () => {
-    const headers = ["Nombre", "Teléfono", "Restricciones", "Mensaje", "Fecha"];
+    const headers = ["Nombre", "Teléfono", "Mensaje", "Fecha"];
     const rows = confirmations.map((item) => [
       item.name,
       item.phone || "",
-      item.dietary_restrictions || "",
       item.message || "",
       new Date(item.created_at).toLocaleDateString("es-ES"),
     ]);
@@ -283,7 +278,6 @@ export default function AdminDashboard() {
 
     const matchFilter =
       filterType === "all" ||
-      (filterType === "dietary" && item.dietary_restrictions) ||
       (filterType === "message" && item.message) ||
       (filterType === "phone" && item.phone);
 

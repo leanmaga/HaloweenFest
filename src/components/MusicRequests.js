@@ -242,10 +242,10 @@ export default function MusicRequests() {
                       textShadow: `0 0 20px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                     }}
                   >
-                    🎵 Playlist Espeluznante 🎵
+                    🎵 Playlist 🎵
                     <br />
                     <span className="text-3xl sm:text-4xl">
-                      ¡Pide tu Canción!
+                      ¡Pedí tu Canción!
                     </span>
                   </h2>
 
@@ -574,10 +574,10 @@ export default function MusicRequests() {
                       textShadow: `0 0 30px ${colores.naranja}, 0 4px 20px rgba(0, 0, 0, 0.8)`,
                     }}
                   >
-                    Playlist Espeluznante
+                    Playlist
                     <br />
                     <span className="text-4xl md:text-5xl lg:text-6xl">
-                      ¡Pide tu Canción! 🎵
+                      ¡Pedí tu Canción! 🎵
                     </span>
                   </h2>
                 </div>

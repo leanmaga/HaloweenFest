@@ -199,27 +199,6 @@ export default function CountdownSection() {
           >
             {nombreEvento}
           </h2>
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Sparkles className="w-6 h-6" style={{ color: colores.dorado }} />
-            <p className="text-2xl md:text-3xl font-light text-orange-300">
-              Una Noche Espeluznante
-            </p>
-            <Sparkles className="w-6 h-6" style={{ color: colores.dorado }} />
-          </div>
-        </div>
-
-        {/* Fecha del evento */}
-        <div
-          className="mb-12 glass-card rounded-2xl p-6 inline-block"
-          style={{ borderColor: colores.naranja }}
-        >
-          <div className="flex items-center gap-3 justify-center mb-2">
-            <Clock className="w-6 h-6" style={{ color: colores.naranja }} />
-            <p className="text-xl md:text-2xl font-medium text-orange-200">
-              {fechaEvento}
-            </p>
-          </div>
-          <p className="text-lg text-orange-300">{horaEvento}</p>
         </div>
 
         {/* Título del countdown */}
@@ -272,13 +251,6 @@ export default function CountdownSection() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Nota adicional */}
-        <div className="mt-8">
-          <p className="text-orange-400 text-lg font-semibold">
-            🎭 No olvides tu disfraz - ¡Es obligatorio! 🎭
-          </p>
         </div>
       </div>
     </section>

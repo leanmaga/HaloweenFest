@@ -109,63 +109,8 @@ export default function Footer() {
           </h2>
 
           <p className="text-xl md:text-2xl text-orange-300 max-w-3xl mx-auto font-medium">
-            ¡Gracias por ser parte de esta noche espeluznante!
+            ¡Gracias por ser parte de esta noche!
           </p>
-
-          <div className="flex items-center justify-center gap-3 mt-6 text-4xl">
-            <span className="animate-pulse">👻</span>
-            <span className="animate-bounce">🦇</span>
-            <span className="animate-pulse">👻</span>
-          </div>
-        </div>
-
-        {/* Grid de Contenido */}
-        <div className="grid md:grid-cols-1 gap-10 mb-16">
-          {/* Detalles del Evento */}
-          <div
-            className="footer-slide-in-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <Sparkles
-                  className="w-6 h-6"
-                  style={{ color: colores.naranja }}
-                />
-                <h3
-                  className="font-serif text-2xl font-bold"
-                  style={{ color: colores.naranja }}
-                >
-                  Detalles del Evento
-                </h3>
-                <Sparkles
-                  className="w-6 h-6"
-                  style={{ color: colores.naranja }}
-                />
-              </div>
-
-              <div className="space-y-3 text-orange-200">
-                <p
-                  className="font-bold text-lg"
-                  style={{ color: colores.dorado }}
-                >
-                  📅 {fechaEvento}
-                </p>
-                <p className="font-semibold">🕐 {horaEvento}</p>
-                <p className="font-bold" style={{ color: colores.dorado }}>
-                  📍 {lugar}
-                </p>
-                <p className="text-sm text-orange-300">{direccion}</p>
-              </div>
-
-              <div
-                className="mt-6 h-1 w-20 rounded-full mx-auto"
-                style={{
-                  background: `linear-gradient(to right, ${colores.naranja}, ${colores.dorado})`,
-                }}
-              />
-            </div>
-          </div>
         </div>
 
         {/* Contacto y Redes Sociales */}
@@ -213,22 +158,6 @@ export default function Footer() {
           />
         </div>
 
-        {/* Mensaje Final */}
-        <div
-          className="text-center mb-8 footer-slide-in-up"
-          style={{ animationDelay: "0.6s" }}
-        >
-          <p className="text-lg md:text-xl text-orange-300 font-medium mb-4">
-            🎃 No olvides tu disfraz - ¡Habrá premio al mejor! 🏆
-          </p>
-          <div className="flex justify-center gap-4 text-3xl">
-            <span>🧛</span>
-            <span>🧙</span>
-            <span>👹</span>
-            <span>🧟</span>
-          </div>
-        </div>
-
         {/* Sección Final */}
         <div
           className="text-center footer-slide-in-up"
@@ -248,9 +177,6 @@ export default function Footer() {
               </a>
             </span>
           </div>
-          <p className="text-xs text-gray-600 mt-4">
-            © 2025 Halloween Party - Todos los derechos reservados
-          </p>
         </div>
       </div>
 

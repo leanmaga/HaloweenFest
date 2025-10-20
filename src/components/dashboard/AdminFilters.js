@@ -39,7 +39,6 @@ export default function AdminFilters({
             >
               <option value="all">Todas las confirmaciones</option>
               <option value="phone">Con teléfono</option>
-              <option value="dietary">Con restricciones</option>
               <option value="message">Con mensaje</option>
             </select>
           </div>

@@ -37,9 +37,6 @@ export default function AdminConfirmationsTable({
                   Teléfono
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
-                  Restricciones
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
                   Mensaje
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-orange-400 uppercase">
@@ -83,19 +80,6 @@ export default function AdminConfirmationsTable({
                           <Phone className="w-4 h-4 text-gray-600" />
                           Sin teléfono
                         </span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-sm max-w-xs">
-                      {guest.dietary_restrictions ? (
-                        <div
-                          className="overflow-y-auto bg-orange-900/50 text-orange-200 px-2 py-1 rounded-lg text-xs border border-orange-500/30"
-                          style={{ maxHeight: "40px" }}
-                          title={guest.dietary_restrictions}
-                        >
-                          {guest.dietary_restrictions}
-                        </div>
-                      ) : (
-                        <span className="text-gray-500 text-xs">Ninguna</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-sm max-w-xs">

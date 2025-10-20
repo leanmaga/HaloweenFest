@@ -316,6 +316,24 @@ export default function HeroSection() {
           >
             25 de Octubre
           </motion.h2>
+          <motion.h2
+            className="text-4xl lg:text-5xl font-bold mb-6"
+            style={{
+              fontFamily: "var(--font-dancing)",
+              color: colores.dorado,
+              textShadow: `0 0 20px ${colores.dorado}, 0 0 40px ${colores.naranja}, 2px 2px 8px rgba(0,0,0,0.9)`,
+            }}
+            animate={{
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            23.59 pm
+          </motion.h2>
 
           <motion.p
             className="text-xl md:text-2xl font-light relative z-10 text-orange-300"
@@ -331,7 +349,7 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            Vení a celebrar una noche de terror y diversión
+            Vení a celebrar la mejor noche de terror
           </motion.p>
 
           {/* Emojis adicionales */}

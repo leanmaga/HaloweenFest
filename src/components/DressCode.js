@@ -97,14 +97,6 @@ export default function DressCodeSection() {
           >
             Código de Vestimenta
           </h2>
-
-          <p className="text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed text-orange-300">
-            Una noche espeluznante requiere el disfraz perfecto.
-            <br />
-            <span className="font-semibold text-orange-400">
-              ¡Prepárate para impresionar y asustar! 🎃
-            </span>
-          </p>
         </div>
 
         {/* Contenido Principal */}
@@ -198,8 +190,8 @@ export default function DressCodeSection() {
                   className="text-center text-lg font-semibold"
                   style={{ color: colores.dorado }}
                 >
-                  🏆 ¡Premios: Champagne + Vino para los mejores disfraces de la
-                  noche! 🏆
+                  🏆 1° Premio: Champagne <br></br>
+                  🏆 2° Premio: Vino
                 </p>
               </div>
             </div>

@@ -36,9 +36,6 @@ export default function LocationSection() {
           >
             Ubicación de la Fiesta
           </h2>
-          <p className="text-xl text-orange-300">
-            ¡Encuentra el lugar de la celebración más espeluznante! 🎃
-          </p>
         </div>
 
         <div className="grid lg:grid-cols-1 gap-12 items-center">

@@ -75,7 +75,7 @@ export const clientConfig = {
   codigoVestimenta: {
     tema: "¡Disfraz Obligatorio!",
     descripcion:
-      "Ven caracterizado con tu disfraz más terrorífico, creativo o divertido. ¡Habrá premio al mejor disfraz!",
+      "Vení con tu disfraz más terrorífico, creativo o divertido. ¡Hay premio al mejor disfraz!",
     coloresRestringidos: [], // No hay restricciones para Halloween
     mensajeRestriccion: "",
     categorias: {}, // Eliminado - se maneja en el componente

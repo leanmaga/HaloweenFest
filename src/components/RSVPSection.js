@@ -5,10 +5,8 @@ import {
   Send,
   User,
   Phone,
-  Utensils,
   Loader2,
   AlertCircle,
-  CheckCircle,
   Calendar,
 } from "lucide-react";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
@@ -18,7 +16,6 @@ export default function RSVPSection() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    dietary_restrictions: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -55,7 +52,6 @@ export default function RSVPSection() {
           email: "no-email@temp.com",
           phone: data.phone || null,
           guests: 1,
-          dietary_restrictions: data.dietary_restrictions || null,
           message: data.message || null,
         },
       ]);
@@ -105,10 +101,6 @@ export default function RSVPSection() {
     let message = `🎃 *CONFIRMACIÓN DE ASISTENCIA - HALLOWEEN PARTY 2025*\n\n`;
     message += `👤 *Nombre:* ${data.name}\n`;
     message += `📱 *Teléfono:* ${data.phone || "No proporcionado"}\n`;
-
-    if (data.dietary_restrictions) {
-      message += `🍽️ *Restricciones alimentarias:* ${data.dietary_restrictions}\n`;
-    }
 
     if (data.message) {
       message += `💀 *Mensaje:* ${data.message}\n`;
@@ -182,11 +174,10 @@ export default function RSVPSection() {
               backgroundRepeat: "no-repeat",
             }}
           >
-            {/* ✅ OVERLAY SEMI-TRANSPARENTE PARA MÓVIL */}
             <div
               className="absolute inset-0"
               style={{
-                background: `rgba(0, 0, 0, 0.6)`, // 60% opacidad
+                background: `rgba(0, 0, 0, 0.6)`,
               }}
             />
 
@@ -230,17 +221,6 @@ export default function RSVPSection() {
                       </span>
                     </div>
                   )}
-                  {rsvpData.dietary_restrictions && (
-                    <div className="flex items-start gap-2 text-orange-200">
-                      <span className="text-lg">🍽️</span>
-                      <span>
-                        <strong className="text-orange-400">
-                          Restricciones:
-                        </strong>{" "}
-                        {rsvpData.dietary_restrictions}
-                      </span>
-                    </div>
-                  )}
                   {rsvpData.message && (
                     <div className="flex items-start gap-2 text-orange-200">
                       <span className="text-lg">💀</span>
@@ -261,7 +241,6 @@ export default function RSVPSection() {
                   setFormData({
                     name: "",
                     phone: "",
-                    dietary_restrictions: "",
                     message: "",
                   });
                 }}
@@ -278,7 +257,6 @@ export default function RSVPSection() {
 
         {/* LAYOUT DESKTOP - Confirmación */}
         <section className="hidden lg:block relative min-h-screen overflow-hidden">
-          {/* ✅ IMAGEN VISIBLE EN DESKTOP */}
           <div className="absolute inset-0 lg:left-1/2 w-full lg:w-1/2">
             <div
               className="w-full h-full"
@@ -289,11 +267,10 @@ export default function RSVPSection() {
                 backgroundRepeat: "no-repeat",
               }}
             />
-            {/* ✅ OVERLAY SEMI-TRANSPARENTE */}
             <div
               className="absolute inset-0"
               style={{
-                background: `rgba(0, 0, 0, 0.5)`, // 50% opacidad
+                background: `rgba(0, 0, 0, 0.5)`,
               }}
             />
           </div>
@@ -353,17 +330,6 @@ export default function RSVPSection() {
                             </span>
                           </div>
                         )}
-                        {rsvpData.dietary_restrictions && (
-                          <div className="flex items-start gap-3 text-lg text-orange-200">
-                            <span className="text-2xl">🍽️</span>
-                            <span>
-                              <strong className="text-orange-400">
-                                Restricciones:
-                              </strong>{" "}
-                              {rsvpData.dietary_restrictions}
-                            </span>
-                          </div>
-                        )}
                         {rsvpData.message && (
                           <div className="flex items-start gap-3 text-lg text-orange-200">
                             <span className="text-2xl">💀</span>
@@ -386,7 +352,6 @@ export default function RSVPSection() {
                         setFormData({
                           name: "",
                           phone: "",
-                          dietary_restrictions: "",
                           message: "",
                         });
                       }}
@@ -426,7 +391,6 @@ export default function RSVPSection() {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                {/* ✅ OVERLAY SEMI-TRANSPARENTE */}
                 <div
                   className="absolute inset-0"
                   style={{
@@ -517,7 +481,7 @@ export default function RSVPSection() {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className="font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <User className="w-4 h-4 text-orange-500" />
                           Nombre Completo *
                           {checkingExisting && (
@@ -540,7 +504,7 @@ export default function RSVPSection() {
                       </div>
 
                       <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className="font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <Phone className="w-4 h-4 text-orange-500" />
                           Teléfono
                         </label>
@@ -560,25 +524,6 @@ export default function RSVPSection() {
 
                       <div>
                         <label className="font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
-                          <Utensils className="w-4 h-4 text-orange-500" />
-                          Restricciones Alimentarias
-                        </label>
-                        <input
-                          type="text"
-                          name="dietary_restrictions"
-                          value={formData.dietary_restrictions}
-                          onChange={handleChange}
-                          disabled={loading}
-                          className="w-full px-3 py-2 bg-orange-900/30 rounded-xl focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
-                          style={{
-                            borderColor: `${colores.naranja}80`,
-                          }}
-                          placeholder="Vegano, celíaco, etc."
-                        />
-                      </div>
-
-                      <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <span className="text-lg">💀</span>
                           Mensaje
                         </label>
@@ -647,7 +592,6 @@ export default function RSVPSection() {
         id="rsvp"
         className="hidden lg:block relative min-h-screen overflow-hidden"
       >
-        {/* ✅ IMAGEN VISIBLE EN DESKTOP - Lado derecho */}
         <div className="absolute inset-0 lg:left-1/2 w-full lg:w-1/2">
           <div
             className="w-full h-full"
@@ -658,16 +602,14 @@ export default function RSVPSection() {
               backgroundRepeat: "no-repeat",
             }}
           />
-          {/* ✅ OVERLAY SEMI-TRANSPARENTE - CAMBIO CLAVE */}
           <div
             className="absolute inset-0"
             style={{
-              background: `rgba(0, 0, 0, 0.5)`, // 50% opacidad en lugar de 100%
+              background: `rgba(0, 0, 0, 0.5)`,
             }}
           />
         </div>
 
-        {/* Fondo negro - Lado izquierdo */}
         <div
           className="absolute inset-0 lg:w-1/2 lg:right-1/2"
           style={{
@@ -678,7 +620,6 @@ export default function RSVPSection() {
         <div className="relative z-10 h-screen flex items-center">
           <div className="w-full h-full">
             <div className="grid lg:grid-cols-2 gap-0 h-full min-h-screen">
-              {/* Formulario - Lado izquierdo */}
               <div className="flex items-center justify-center h-full min-h-screen lg:min-h-0 px-8">
                 <div className="w-full max-w-lg">
                   <div className="text-center mb-8 rsvp-fade-in-up">
@@ -716,7 +657,7 @@ export default function RSVPSection() {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
+                        <label className="font-medium mb-2 flex items-center gap-2 text-sm text-orange-300">
                           <User className="w-4 h-4 text-orange-500" />
                           Nombre Completo *
                           {checkingExisting && (
@@ -739,7 +680,7 @@ export default function RSVPSection() {
                       </div>
 
                       <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-orange-300">
+                        <label className="font-medium mb-2 flex items-center gap-2 text-orange-300">
                           <Phone className="w-4 h-4 text-orange-500" />
                           <span className="text-sm">Teléfono</span>
                         </label>
@@ -758,28 +699,7 @@ export default function RSVPSection() {
                       </div>
 
                       <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-orange-300">
-                          <Utensils className="w-4 h-4 text-orange-500" />
-                          <span className="text-sm">
-                            Restricciones Alimentarias
-                          </span>
-                        </label>
-                        <input
-                          type="text"
-                          name="dietary_restrictions"
-                          value={formData.dietary_restrictions}
-                          onChange={handleChange}
-                          disabled={loading}
-                          className="w-full px-3 py-2 bg-orange-900/30 rounded-lg focus:outline-none focus:ring-2 transition-all text-sm text-white border-2"
-                          style={{
-                            borderColor: `${colores.naranja}80`,
-                          }}
-                          placeholder="Vegano, celíaco, etc."
-                        />
-                      </div>
-
-                      <div>
-                        <label className=" font-medium mb-2 flex items-center gap-2 text-orange-300">
+                        <label className="font-medium mb-2 flex items-center gap-2 text-orange-300">
                           <span className="text-lg">💀</span>
                           <span className="text-sm">Mensaje</span>
                         </label>
@@ -839,7 +759,6 @@ export default function RSVPSection() {
                 </div>
               </div>
 
-              {/* Imagen visible - Lado derecho */}
               <div className="hidden lg:block"></div>
             </div>
           </div>
