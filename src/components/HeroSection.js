@@ -474,40 +474,6 @@ export default function HeroSection() {
           }}
         />
       </motion.div>
-
-      {/* Emojis flotantes adicionales */}
-      <motion.div
-        className="absolute top-1/3 left-1/4 text-4xl"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 10, -10, 0],
-          opacity: [0.3, 0.7, 0.3],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        👻
-      </motion.div>
-
-      <motion.div
-        className="absolute top-2/3 right-1/4 text-3xl"
-        animate={{
-          y: [0, 15, 0],
-          x: [0, -10, 0],
-          opacity: [0.4, 0.8, 0.4],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      >
-        🦇
-      </motion.div>
     </section>
   );
 }
