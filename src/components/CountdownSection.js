@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Clock, Sparkles } from "lucide-react";
 import { useHalloweenConfig } from "@/hooks/useHalloweenConfig";
 
 export default function CountdownSection() {
@@ -14,7 +13,7 @@ export default function CountdownSection() {
   const [particles, setParticles] = useState([]);
 
   // ✅ Usar configuración centralizada
-  const { fechaEvento, fechaCompleta, horaEvento, nombreEvento, colores } =
+  const { fechaCompleta, horaInicio, nombreEvento, colores } =
     useHalloweenConfig();
 
   // Generar partículas sutiles con emojis
@@ -35,7 +34,7 @@ export default function CountdownSection() {
     // Parsear la fecha del evento
     const calculateTimeLeft = () => {
       try {
-        const eventDate = new Date(fechaCompleta);
+        const eventDate = new Date(`${fechaCompleta}T${horaInicio}:00`);
         const now = new Date();
         const difference = eventDate - now;
 
