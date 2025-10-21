@@ -332,7 +332,7 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            23.59 pm
+            23.59 hs
           </motion.h2>
 
           <motion.p

@@ -12,7 +12,7 @@ export const clientConfig = {
     // ⚠️ IMPORTANTE: Formato de fechaCompleta para countdown (YYYY-MM-DD)
     fechaCompleta: "2025-10-25",
     horaInicio: "23:59",
-    horaFin: "05:00 AM",
+    horaFin: "05:00",
   },
 
   // 📍 UBICACIÓN
