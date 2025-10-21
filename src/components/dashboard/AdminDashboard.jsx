@@ -121,11 +121,13 @@ export default function AdminDashboard() {
   const calculateStats = (rsvpData, songsData = songs) => {
     const withMessages = rsvpData.filter((item) => item.message).length;
     const withPhone = rsvpData.filter((item) => item.phone).length;
+    const withCostume = rsvpData.filter((item) => item.costume).length;
 
     setStats({
       totalConfirmations: rsvpData.length,
       withMessages,
       withPhone,
+      withCostume,
       totalSongs: songsData.length,
     });
   };
