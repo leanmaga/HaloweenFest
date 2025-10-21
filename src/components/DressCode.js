@@ -131,7 +131,7 @@ export default function DressCodeSection() {
               className="text-3xl md:text-4xl font-bold mb-4"
               style={{ color: colores.naranja }}
             >
-              ¡Disfrazate y Aterrroriza! 👻
+              ¡Disfrazate y Aterrroriza!👻
             </h3>
             <p className="text-xl text-orange-300 max-w-3xl mx-auto">
               La noche más oscura del año merece el mejor disfraz. Vení
