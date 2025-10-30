@@ -8,18 +8,18 @@ export const clientConfig = {
 
   // 📅 INFORMACIÓN DEL EVENTO
   evento: {
-    fecha: "Sábado 25 de Octubre, 2025",
+    fecha: "Sábado 1 de Noviembre, 2025",
     // ⚠️ IMPORTANTE: Formato de fechaCompleta para countdown (YYYY-MM-DD)
-    fechaCompleta: "2025-10-25",
+    fechaCompleta: "2025-11-01",
     horaInicio: "23:59",
     horaFin: "05:00",
   },
 
   // 📍 UBICACIÓN
   ubicacion: {
-    nombreLugar: "Manuel Soler 1855",
-    direccion: "Entre Gamboa y Terán, Libertad, Merlo.",
-    ciudad: "Libertad, Merlo",
+    nombreLugar: "Dirección 1234",
+    direccion: "Entre Calle y Calle, Localidad, Partido.",
+    ciudad: "Ciudad, Localidad",
     provincia: "Buenos Aires",
     pais: "Argentina",
     // URLs de mapas
@@ -31,9 +31,9 @@ export const clientConfig = {
   // 👨‍👩‍👧‍👦 INFORMACIÓN DE CONTACTO
   contacto: {
     nombreFamilia: "Organizadores",
-    telefono: "+54 9 11 3566-0145",
+    telefono: "+54 9 11 2776-4823",
     email: "contacto@example.com",
-    whatsapp: "+541135660145", // Sin espacios ni guiones
+    whatsapp: "+541127764823", // Sin espacios ni guiones
   },
 
   // 📱 REDES SOCIALES
@@ -56,9 +56,9 @@ export const clientConfig = {
 
   // 📝 CONFIRMACIÓN DE ASISTENCIA (RSVP)
   rsvp: {
-    fechaLimite: "Viernes 24 de Octubre, 2025",
+    fechaLimite: "Viernes 31 de Octubre, 2025",
     // Fecha límite en formato ISO para validaciones
-    fechaLimiteISO: "2025-10-24",
+    fechaLimiteISO: "2025-10-31",
     mensajeCierre: "¡Gracias por confirmar tu asistencia!",
     mostrarDietaryRestrictions: true, // Mostrar campo de restricciones alimentarias
   },

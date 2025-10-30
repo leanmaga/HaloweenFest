@@ -13,7 +13,7 @@ export default function LocationSection() {
   const {
     lugar = "Ubicación",
     direccion = "Dirección no disponible",
-    telefono = "+54 9 11 3566-0145",
+    telefono = "+54 9 11 2776-4823",
     googleMapsUrl = "#",
     wazeUrl = "#",
     colores,
